@@ -1,4 +1,4 @@
-package DomainModel.Student;
+package DomainModel;
 
 import java.sql.Date;
 
