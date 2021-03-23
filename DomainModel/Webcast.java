@@ -1,15 +1,17 @@
 package DomainModel;
 
-public class Webcast {
+import java.sql.Date;
+
+public class Webcast extends ContentItem {
   private String title;
-  private int duration;
   private String speakerName;
   private String speakerEmail;
   private String url;
 
-  public Webcast(String title, int duration, String speakerName, String speakerEmail, String url) {
+  public Webcast(int contentId, Date publicationDate, String status, String description, String title,
+      String speakerName, String speakerEmail, String url) {
+    super(contentId, publicationDate, status, description);
     this.title = title;
-    this.duration = duration;
     this.speakerName = speakerName;
     this.speakerEmail = speakerEmail;
     this.url = url;
