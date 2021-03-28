@@ -1,4 +1,4 @@
-package DataStorageLayer;
+package ApplicationLogic;
 
 public class StudentController implements ControllerInterface {
 
