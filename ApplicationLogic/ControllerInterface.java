@@ -1,4 +1,4 @@
-package DataStorageLayer;
+package ApplicationLogic;
 
 public interface ControllerInterface<T> {
   public boolean create(T identifier);
