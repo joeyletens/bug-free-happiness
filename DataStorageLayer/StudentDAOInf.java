@@ -5,11 +5,19 @@ import java.sql.SQLException;
 import DomainModel.Student;
 
 public interface StudentDAOInf {
-  public boolean create(Student student) throws SQLException;
+  public static boolean create() throws SQLException {
+    return false;
+  }
 
-  public String read(Student student) throws SQLException;
+  public static String read() {
+    return null;
+  }
 
-  public boolean update(Student student) throws SQLException;
+  public static boolean update() {
+    return false;
+  }
 
-  public boolean delete(Student student) throws SQLException;
+  public static boolean delete() {
+    return false;
+  }
 }
