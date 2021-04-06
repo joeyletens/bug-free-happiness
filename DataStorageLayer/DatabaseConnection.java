@@ -50,8 +50,10 @@ public class DatabaseConnection {
     }
   }
 
-  public boolean ExecuteSelectStatement(String query) {
-    return false;
+  // excute the prepared statement
+  public ResultSet ExecuteSelectStatement(String query) {
+    return null;
+
   }
 
   public boolean ExecuteDeleteStatement(Student student) throws SQLException {
@@ -64,9 +66,9 @@ public class DatabaseConnection {
     return true;
   }
 
-  public ResultSet ExecuteReadStatement(Student student) throws SQLException {
+  public boolean ExecuteInsertStatement(Student student) throws SQLException {
 
-    return null;
+    return false;
   }
 
 }
