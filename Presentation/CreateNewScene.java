@@ -20,10 +20,6 @@ public class CreateNewScene extends Application {
     window.show();
   }
 
-  public static void startApplication() {
-    launch(CreateNewScene.class);
-  }
-
   public static void changeScene(Scene scene) {
     window.setScene(scene);
   }
