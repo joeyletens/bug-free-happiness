@@ -1,11 +1,13 @@
 package Presentation.Student;
 
+import Presentation.CreateNewScene;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
 public class studentPage {
-  public static GridPane studentForm() {
+  public static GridPane studentCRUD() {
     // TODO Auto-generated method stub
     GridPane studentScreen = new GridPane();
 
@@ -16,8 +18,9 @@ public class studentPage {
     buttonList.setPadding(new Insets(0, 10, 0, 10));
 
     // Button to add student
-    Button studentBtn = new Button("Student");
-    buttonList.add(studentBtn, 0, 0);
+    Button Add = new Button("Student");
+    buttonList.add(Add, 0, 0);
+    Add.setOnAction(e -> CreateNewScene.changeScene(new Scene(CreateStudentForm.studentForm())));
 
     // Button to read student
     Button registrationBtn = new Button("Registration");
