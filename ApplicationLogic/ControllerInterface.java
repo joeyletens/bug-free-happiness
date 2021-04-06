@@ -1,11 +1,19 @@
 package ApplicationLogic;
 
-public interface ControllerInterface<T> {
-  public boolean create(T identifier);
+public interface ControllerInterface {
+  public static boolean create() {
+    return false;
+  }
 
-  public T read(T identifier);
+  public static String read() {
+    return null;
+  }
 
-  public boolean update(T identifier);
+  public static boolean update() {
+    return false;
+  }
 
-  public boolean delete(T identifier);
+  public static boolean delete() {
+    return false;
+  }
 }
