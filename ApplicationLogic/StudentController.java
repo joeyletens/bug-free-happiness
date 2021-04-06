@@ -1,27 +1,27 @@
 package ApplicationLogic;
 
-public class StudentController implements ControllerInterface {
+import DataStorageLayer.MySQLStudentDAO;
+import DomainModel.Student;
 
-  @Override
-  public boolean create(Object identifier) {
+public class StudentController {
+
+  public static boolean create(Student student) {
     // TODO Auto-generated method stub
+
     return false;
   }
 
-  @Override
-  public Object read(Object identifier) {
+  public static Object read(Student student) {
     // TODO Auto-generated method stub
     return null;
   }
 
-  @Override
-  public boolean update(Object identifier) {
+  public static boolean update(Student student) {
     // TODO Auto-generated method stub
     return false;
   }
 
-  @Override
-  public boolean delete(Object identifier) {
+  public static boolean delete(Student student) {
     // TODO Auto-generated method stub
     return false;
   }
