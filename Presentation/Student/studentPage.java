@@ -34,10 +34,12 @@ public class StudentPage {
     // Button to see the statistics
     Button update = new Button("Update");
     studentScreen.add(update, 0, 3);
+    update.setOnAction(e -> CreateNewScene.changeScene(new Scene(UpdateStudentForm.studentForm())));
 
     // Button to go to registration page
     Button delete = new Button("Delete");
     studentScreen.add(delete, 0, 4);
+    delete.setOnAction(e -> CreateNewScene.changeScene(new Scene(DeleteStudentForm.studentForm())));
 
     // Button to see the statistics
     Button home = new Button("Homepage");
