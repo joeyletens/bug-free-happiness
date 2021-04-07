@@ -1,11 +1,9 @@
 package DataStorageLayer;
 
-import java.sql.SQLException;
-
 import DomainModel.Student;
 
 public interface StudentDAOInf {
-  public static boolean create() throws SQLException {
+  public static boolean create() {
     return false;
   }
 
