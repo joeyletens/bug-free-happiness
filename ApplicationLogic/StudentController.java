@@ -21,7 +21,7 @@ public class StudentController {
     return false;
   }
 
-  public static boolean delete(Student student) {
+  public static boolean delete(String email) {
     // TODO Auto-generated method stub
     return false;
   }
