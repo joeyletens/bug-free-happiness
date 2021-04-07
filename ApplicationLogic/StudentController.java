@@ -11,9 +11,9 @@ public class StudentController {
     return false;
   }
 
-  public static Object read(Student student) {
+  public static void read(String email) {
     // TODO Auto-generated method stub
-    return null;
+
   }
 
   public static boolean update(Student student) {

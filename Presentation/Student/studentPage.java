@@ -1,42 +1,48 @@
 package Presentation.Student;
 
 import Presentation.CreateNewScene;
+import Presentation.HomePage;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
-public class studentPage {
+public class StudentPage {
   public static GridPane studentCRUD() {
-    // TODO Auto-generated method stub
-    GridPane studentScreen = new GridPane();
 
     // Create button list
-    GridPane buttonList = new GridPane();
-    buttonList.setHgap(10);
-    buttonList.setVgap(10);
-    buttonList.setPadding(new Insets(0, 10, 0, 10));
+    GridPane studentScreen = new GridPane();
+    studentScreen.setHgap(10);
+    studentScreen.setVgap(10);
+    studentScreen.setPadding(new Insets(0, 10, 0, 10));
+
+    // Label for title
+    Label title = new Label("Student");
+    studentScreen.add(title, 0, 0);
 
     // Button to add student
-    Button Add = new Button("Student");
-    buttonList.add(Add, 0, 0);
-    Add.setOnAction(e -> CreateNewScene.changeScene(new Scene(CreateStudentForm.studentForm())));
+    Button add = new Button("Add");
+    studentScreen.add(add, 0, 1);
+    add.setOnAction(e -> CreateNewScene.changeScene(new Scene(CreateStudentForm.studentForm())));
 
     // Button to read student
-    Button registrationBtn = new Button("Registration");
-    buttonList.add(registrationBtn, 0, 1);
+    Button read = new Button("Read");
+    studentScreen.add(read, 0, 2);
+    read.setOnAction(e -> CreateNewScene.changeScene(new Scene(ReadStudentForm.studentForm())));
 
     // Button to see the statistics
-    Button statisticsBtn = new Button("Statistics");
-    buttonList.add(statisticsBtn, 0, 2);
+    Button update = new Button("Update");
+    studentScreen.add(update, 0, 3);
 
-    // // Button to go to registration page
-    // Button registrationBtn = new Button("Registration");
-    // buttonList.add(registrationBtn, 0, 1);
+    // Button to go to registration page
+    Button delete = new Button("Delete");
+    studentScreen.add(delete, 0, 4);
 
-    // // Button to see the statistics
-    // Button statisticsBtn = new Button("Statistics");
-    // buttonList.add(statisticsBtn, 0, 2);
+    // Button to see the statistics
+    Button home = new Button("Homepage");
+    studentScreen.add(home, 0, 5);
+    home.setOnAction(e -> CreateNewScene.changeScene(new Scene(HomePage.setHomePage())));
 
     return studentScreen;
   }

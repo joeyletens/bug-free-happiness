@@ -1,7 +1,7 @@
 package Presentation;
 
 import Presentation.Student.CreateStudentForm;
-import Presentation.Student.studentPage;
+import Presentation.Student.StudentPage;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.stage.*;
@@ -25,11 +25,12 @@ public class HomePage {
     // Button to add student
     Button studentBtn = new Button("Student");
     buttonList.add(studentBtn, 0, 0);
-    studentBtn.setOnAction(e -> CreateNewScene.changeScene(new Scene(studentPage.studentCRUD())));
+    studentBtn.setOnAction(e -> CreateNewScene.changeScene(new Scene(StudentPage.studentCRUD())));
 
     // Button to go to registration page
     Button registrationBtn = new Button("Registration");
     buttonList.add(registrationBtn, 0, 1);
+    registrationBtn.setOnAction(e -> CreateNewScene.changeScene(new Scene(CreateStudentForm.studentForm())));
 
     // Button to see the statistics
     Button statisticsBtn = new Button("Statistics");
