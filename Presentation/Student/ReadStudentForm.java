@@ -11,6 +11,7 @@ public class ReadStudentForm {
   static TextField email;
   static Button cancel, add;
 
+  // GET STUDENT DATA
   public static GridPane studentForm() {
     // TODO Auto-generated method stub
 
@@ -20,7 +21,7 @@ public class ReadStudentForm {
     form.setPadding(new Insets(0, 10, 0, 10));
 
     // Create and add email textfield
-    form.add(new Label("READ: Enter student details below"), 0, 0);
+    form.add(new Label("READ: Enter student email below"), 0, 0);
     form.add(new Label("Email:"), 0, 1);
     email = new TextField();
     form.add(email, 1, 1);
