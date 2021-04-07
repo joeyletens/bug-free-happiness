@@ -6,12 +6,16 @@ import java.sql.SQLException;
 
 import DomainModel.Student;
 
+// This is the student DAO
+// Here are the queries made which are used to manage the database
+
 public class MySQLStudentDAO implements StudentDAOInf {
 
   public static ResultSet executeCommand = null;
   private static PreparedStatement ps;
   private static ResultSet rs;
 
+  // This creates a new student with a prepared statement
   public static boolean create(Student student) throws SQLException {
     // create query
     String query = "INSERT INTO Student VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -42,6 +46,7 @@ public class MySQLStudentDAO implements StudentDAOInf {
     return true;
   }
 
+  // Method to send a request to the database to read data with a specifict email
   public static ResultSet read(String email) throws SQLException {
 
     String query = "SELECT * FROM Student WHERE email = '?'";
@@ -58,6 +63,7 @@ public class MySQLStudentDAO implements StudentDAOInf {
     return rs;
   }
 
+  // Method to choose which user you want to update their data
   public static boolean update(Student student) {
 
     // 2. prepare statement
@@ -69,6 +75,7 @@ public class MySQLStudentDAO implements StudentDAOInf {
     return true;
   }
 
+  // Oh no a method to deleted a student via their email
   public static boolean delete(Student student) {
 
     // 2. prepare statement

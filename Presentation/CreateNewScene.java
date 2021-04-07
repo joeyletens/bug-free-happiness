@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 public class CreateNewScene extends Application {
   private static Stage window = new Stage();
 
+  // Starts the Application's GUI called by the main
   @Override
   public void start(Stage arg0) throws Exception {
 
@@ -20,6 +21,7 @@ public class CreateNewScene extends Application {
     window.show();
   }
 
+  // When called this method changes the GUI's current scene
   public static void changeScene(Scene scene) {
     window.setScene(scene);
   }

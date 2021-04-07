@@ -9,11 +9,8 @@ import java.sql.Statement;
 
 import DomainModel.Student;
 
-// + ExecuteSelectStatement(query : String) : ResultSet
-
-// + ExecuteDeleteStatementQuery : String) : boolean
-
-// + ExecuteUpdateStatementQuery : String) : boolean
+// this class opens and closes database connection
+// executes all 4 CRUD statements.
 
 public class DatabaseConnection {
 
@@ -25,11 +22,8 @@ public class DatabaseConnection {
   public static boolean OpenConnection() {
 
     try {
-      // Dit zijn de instellingen voor de verbinding. Vervang de databaseName indien
-      // deze voor jou anders is.
-      String connectionUrl = "jdbc:sqlserver://localhost\\MSSQLSERVER;databaseName=Codecademyw;integratedSecurity=true;";
-
-      // Connection beheert informatie over de connectie met de database.
+      // database URL
+      String connectionUrl = "jdbc:sqlserver://localhost\\MSSQLSERVER;databaseName=Codecademy;integratedSecurity=true;";
 
       conn = DriverManager.getConnection(connectionUrl);
 
@@ -41,6 +35,7 @@ public class DatabaseConnection {
     }
   }
 
+  // Closes connection with database
   public static boolean CloseConnection() throws SQLException {
     try {
       conn.close();
@@ -51,6 +46,7 @@ public class DatabaseConnection {
     }
   }
 
+  // Executes insert statement
   public static boolean ExecuteInsertStatement(String query, PreparedStatement ps) throws SQLException {
     OpenConnection();
 
