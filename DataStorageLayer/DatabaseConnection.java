@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import DomainModel.Student;
 
@@ -17,8 +18,8 @@ import DomainModel.Student;
 public class DatabaseConnection {
 
   public static Connection conn = null;
-  public ResultSet executeCommand = null;
-  public PreparedStatement add = null;
+  private static Statement stmt;
+  private static ResultSet rs;
 
   // open a connection with the database
   public static boolean OpenConnection() {
@@ -50,9 +51,30 @@ public class DatabaseConnection {
     }
   }
 
+  public static boolean ExecuteInsertStatement(String query, PreparedStatement ps) throws SQLException {
+    OpenConnection();
+
+    stmt = conn.createStatement();
+
+    rs = stmt.executeQuery(query);
+
+    CloseConnection();
+
+    return true;
+  }
+
   // excute the prepared statement
-  public ResultSet ExecuteSelectStatement(String query) {
-    return null;
+  public static ResultSet ExecuteSelectStatement(String query, PreparedStatement ps) throws SQLException {
+
+    OpenConnection();
+
+    stmt = conn.createStatement();
+
+    rs = stmt.executeQuery(query);
+
+    CloseConnection();
+
+    return rs;
 
   }
 
@@ -64,11 +86,6 @@ public class DatabaseConnection {
   public boolean ExecuteUpdateStatement(Student student) throws SQLException {
 
     return true;
-  }
-
-  public boolean ExecuteInsertStatement(Student student) throws SQLException {
-
-    return false;
   }
 
 }
