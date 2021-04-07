@@ -16,20 +16,20 @@ public class DeleteStudentForm {
     // TODO Auto-generated method stub
 
     GridPane form = new GridPane();
-    form.setHgap(10);
-    form.setVgap(10);
-    form.setPadding(new Insets(0, 10, 0, 10));
+    form.setHgap(25);
+    form.setVgap(15);
+    form.setPadding(new Insets(15, 25, 15, 25));
 
     // Create and add email textfield
-    form.add(new Label("DELETE: Enter student email below"), 0, 0);
-    form.add(new Label("Email:"), 0, 1);
+    form.add(new Label("DELETE: Enter student email below"), 0, 0, 3, 1);
+    form.add(new Label("Email:"), 0, 1, 3, 1);
     email = new TextField();
-    form.add(email, 1, 1);
+    form.add(email, 0, 2, 3, 1);
 
     // Create back to student page button
     Button backToStudentPage = new Button("Back to student page");
     backToStudentPage.setOnAction(e -> CreateNewScene.changeScene(new Scene(StudentPage.studentCRUD())));
-    form.add(backToStudentPage, 0, 2);
+    form.add(backToStudentPage, 0, 3);
 
     // Creates a new student when pressed on the button
 
@@ -39,7 +39,7 @@ public class DeleteStudentForm {
       ApplicationLogic.StudentController.delete(email.getText());
 
     });
-    form.add(createStudentBtn, 1, 2);
+    form.add(createStudentBtn, 2, 3);
 
     return form;
   }
