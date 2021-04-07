@@ -8,6 +8,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+// This class pop-ups when a user asks for data
+// It gives a response if adding/deleting/updating succeeded or failed
+// Show the fetched data from a select statement
+
 public class InfoBox {
   // Display data resultset when called or display create/update/delete result
   public static void Display(String title, String message) {
