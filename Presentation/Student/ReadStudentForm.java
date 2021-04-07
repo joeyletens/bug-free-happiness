@@ -1,7 +1,5 @@
 package Presentation.Student;
 
-import ApplicationLogic.StudentController;
-import DomainModel.Student;
 import Presentation.CreateNewScene;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
