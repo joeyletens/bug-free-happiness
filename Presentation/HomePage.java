@@ -1,5 +1,6 @@
 package Presentation;
 
+import Presentation.Course.CoursePage;
 import Presentation.Student.CreateStudentForm;
 import Presentation.Student.StudentPage;
 import javafx.scene.*;
@@ -12,7 +13,7 @@ import javafx.geometry.*;
 public class HomePage {
 
   // Standard button sizes
-  private static int buttonWidth = 100;
+  private static int buttonWidth = 120;
   private static int buttonHeight = 50;
 
   // Class to return a borderpane of the HomePage, return a layout
@@ -33,7 +34,7 @@ public class HomePage {
     buttonList.add(title, 0, 0, 3, 1);
 
     // Label for text
-    Label text = new Label("Select what you would like to change/view/delete/create");
+    Label text = new Label("Select what you would like to do or view");
     text.setStyle("-fx-font: 14 arial;");
     buttonList.add(text, 0, 1, 3, 1);
 
@@ -43,15 +44,24 @@ public class HomePage {
     studentBtn.setOnAction(e -> CreateNewScene.changeScene(new Scene(StudentPage.studentCRUD())));
     studentBtn.setMinSize(buttonWidth, buttonHeight);
 
-    // Button to go to registration page
-    Button registrationBtn = new Button("Registration");
-    buttonList.add(registrationBtn, 1, 2);
-    registrationBtn.setOnAction(e -> CreateNewScene.changeScene(new Scene(CreateStudentForm.studentForm())));
-    registrationBtn.setMinSize(buttonWidth, buttonHeight);
+    // Button to go to course page
+    Button courseBtn = new Button("Course");
+    buttonList.add(courseBtn, 1, 2);
+    courseBtn.setOnAction(e -> CreateNewScene.changeScene(new Scene(CoursePage.createCoursePage())));
+    courseBtn.setMinSize(buttonWidth, buttonHeight);
+
+    // Button to go to webcast page
+    Button webcastBtn = new Button("Webcasts");
+    buttonList.add(webcastBtn, 0, 3);
+    // webcastBtn.setOnAction(e -> CreateNewScene.changeScene(new
+    // Scene(CoursePage.createCoursePage())));
+    webcastBtn.setMinSize(buttonWidth, buttonHeight);
 
     // Button to see the statistics
     Button statisticsBtn = new Button("Statistics");
-    buttonList.add(statisticsBtn, 2, 2);
+    buttonList.add(statisticsBtn, 1, 3);
+    // webcastBtn.setOnAction(e -> CreateNewScene.changeScene(new
+    // Scene(CoursePage.createCoursePage())));
     statisticsBtn.setMinSize(buttonWidth, buttonHeight);
 
     // Set layout
