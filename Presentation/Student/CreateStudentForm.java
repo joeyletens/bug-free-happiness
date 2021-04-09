@@ -1,24 +1,20 @@
 package Presentation.Student;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-import ApplicationLogic.StudentController;
-import DomainModel.Student;
 import Presentation.CreateNewScene;
-import javafx.scene.Scene;
+import Presentation.PresentationInf;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.geometry.*;
 
-public class CreateStudentForm {
+public class CreateStudentForm implements PresentationInf {
 
-  static TextField email, firstName, lastName, dateOfBirth, postalCode, street, houseNumber, city, country;
-  static Button backToStudentPage, createStudentBtn;
-  private static int buttonWidth = 30;
-  private static int buttonHeight = 10;
+  private TextField email, firstName, lastName, dateOfBirth, postalCode, street, houseNumber, city, country;
+  private Button backToStudentPage, createStudentBtn;
+  private int buttonWidth = 30;
+  private int buttonHeight = 10;
 
-  public static GridPane studentForm() {
+  public GridPane GUI() {
+    CreateNewScene createNewScene = new CreateNewScene();
     // TODO Auto-generated method stub
 
     GridPane form = new GridPane();
@@ -41,8 +37,8 @@ public class CreateStudentForm {
     form.add(lastName, 0, 6, 3, 1);
 
     form.add(new Label("Date of birth: dd/mm/yyyy"), 0, 7, 3, 1);
-    lastName = new TextField("01/01/2021");
-    form.add(lastName, 0, 8, 3, 1);
+    dateOfBirth = new TextField("01/01/2021");
+    form.add(dateOfBirth, 0, 8, 3, 1);
 
     ChoiceBox<String> gender = new ChoiceBox<>();
     gender.getItems().addAll("Male", "Female", "Other");
@@ -70,7 +66,8 @@ public class CreateStudentForm {
     form.add(country, 3, 10, 3, 1);
 
     backToStudentPage = new Button("Back to student page");
-    backToStudentPage.setOnAction(e -> CreateNewScene.changeScene(new Scene(StudentPage.studentCRUD())));
+    StudentPage studentPage = new StudentPage();
+    backToStudentPage.setOnAction(e -> createNewScene.changeScene((studentPage.GUI())));
     backToStudentPage.setMinSize(buttonWidth, buttonHeight);
     form.add(backToStudentPage, 0, 11, 3, 1);
 
@@ -79,41 +76,10 @@ public class CreateStudentForm {
     createStudentBtn = new Button("Add");
     createStudentBtn.setMinSize(buttonWidth, buttonHeight);
     createStudentBtn.setOnAction(e -> {
-
-      System.out.println("Add button called");
-
-      String varEmail = email.getText();
-      String varFirstName = firstName.getText();
-      String varLastName = lastName.getText();
-      String varDateOfBirth = dateOfBirth.getText();
-      String varGender = gender.getValue();
-      String varStreet = street.getText();
-      String varHouseNumber = houseNumber.getText();
-      String varPostalCode = postalCode.getText();
-      String varCity = city.getText();
-      String varCountry = country.getText();
-
-      System.out.println("Variables created");
-
-      Student student = new Student(varEmail, varFirstName, varLastName, varDateOfBirth, varGender, varStreet,
-          varHouseNumber, varPostalCode, varCity, varCountry);
-
-      System.out.println("Student created");
-      try {
-        if (student != null) {
-          StudentController.create(student);
-          System.out.println("StudentController method called");
-        } else {
-          System.out.println("Creating student object does not work");
-        }
-      } catch (SQLException e1) {
-        // TODO Auto-generated catch block
-        e1.printStackTrace();
-      }
-
+      // nothing
     });
     form.add(createStudentBtn, 3, 11, 3, 1);
     return form;
-  }
 
+  }
 }

@@ -1,18 +1,19 @@
 package Presentation.Student;
 
-import Presentation.CreateNewScene;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import Presentation.CreateNewScene;
+import Presentation.PresentationInf;
 import javafx.geometry.*;
 
 // DELETE STUDENT FROM DATABASE
-public class DeleteStudentForm {
+public class DeleteStudentForm implements PresentationInf {
 
-  static TextField email;
-  static Button cancel, add;
+  TextField email;
+  Button cancel, add;
 
-  public static GridPane studentForm() {
+  public GridPane GUI() {
+    CreateNewScene createNewScene = new CreateNewScene();
     // TODO Auto-generated method stub
 
     GridPane form = new GridPane();
@@ -28,15 +29,14 @@ public class DeleteStudentForm {
 
     // Create back to student page button
     Button backToStudentPage = new Button("Back to student page");
-    backToStudentPage.setOnAction(e -> CreateNewScene.changeScene(new Scene(StudentPage.studentCRUD())));
+    StudentPage studentPage = new StudentPage();
+    backToStudentPage.setOnAction(e -> createNewScene.changeScene(studentPage.GUI()));
     form.add(backToStudentPage, 0, 3);
 
     // Creates a new student when pressed on the button
 
     Button createStudentBtn = new Button("Get data");
     createStudentBtn.setOnAction(e -> {
-
-      ApplicationLogic.StudentController.delete(email.getText());
 
     });
     form.add(createStudentBtn, 2, 3);
