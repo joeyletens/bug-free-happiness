@@ -2,33 +2,29 @@ package DataStorageLayer;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
-
-import DomainModel.Student;
 
 // this class opens and closes database connection
 // executes all 4 CRUD statements. 
 
 public class DatabaseConnection {
 
-  public static Connection conn = null;
-  private static Statement stmt;
-  private static ResultSet rs;
+  public Connection conn = null;
+  private Statement stmt;
+  private ResultSet rs;
+  private final String DB_USERNAME = "sa";
+  private final String DB_PASSWORD = "QuattroIsLeuk";
+  private final String DB_URL = "jdbc:sqlserver://localhost\\MSSQLSERVER;databaseName=CodecademyStudent";
 
   // open a connection with the database
-  public static boolean OpenConnection() {
+  public boolean openConnection() {
 
     try {
       // database URL
+      // Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
-      Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-
-      String connectionUrl = "jdbc:sqlserver://localhost\\MSSQLSERVER;databaseName=CodecademyStudent;integratedSecurity=true;";
-
-      conn = DriverManager.getConnection(connectionUrl);
+      conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
 
       return true;
 
@@ -39,52 +35,54 @@ public class DatabaseConnection {
   }
 
   // Closes connection with database
-  public static boolean CloseConnection() throws SQLException {
-    try {
-      conn.close();
-      return true;
-    } catch (Exception e) {
-      e.printStackTrace();
-      return false;
-    }
-  }
+  // public final boolean CloseConnection() throws SQLException {
+  // try {
+  // conn.close();
+  // return true;
+  // } catch (Exception e) {
+  // e.printStackTrace();
+  // return false;
+  // }
+  // }
 
-  // Executes insert statement
-  public static boolean ExecuteInsertStatement(String query, PreparedStatement ps) throws SQLException {
-    OpenConnection();
+  // // Executes insert statement
+  // public final boolean ExecuteInsertStatement(String query, PreparedStatement
+  // ps) throws SQLException {
+  // OpenConnection();
 
-    stmt = conn.createStatement();
+  // stmt = conn.createStatement();
 
-    rs = stmt.executeQuery(query);
+  // rs = stmt.executeQuery(query);
 
-    CloseConnection();
+  // CloseConnection();
 
-    return true;
-  }
+  // return true;
+  // }
 
-  // excute the prepared statement
-  public static ResultSet ExecuteSelectStatement(String query, PreparedStatement ps) throws SQLException {
+  // // excute the prepared statement
+  // public final ResultSet ExecuteSelectStatement(String query,
+  // PreparedStatement ps) throws SQLException {
 
-    OpenConnection();
+  // OpenConnection();
 
-    stmt = conn.createStatement();
+  // stmt = conn.createStatement();
 
-    rs = stmt.executeQuery(query);
+  // rs = stmt.executeQuery(query);
 
-    CloseConnection();
+  // CloseConnection();
 
-    return rs;
+  // return rs;
 
-  }
+  // }
 
-  public boolean ExecuteDeleteStatement(Student student) throws SQLException {
+  // public boolean ExecuteDeleteStatement(Student student) throws SQLException {
 
-    return true;
-  }
+  // return true;
+  // }
 
-  public boolean ExecuteUpdateStatement(Student student) throws SQLException {
+  // public boolean ExecuteUpdateStatement(Student student) throws SQLException {
 
-    return true;
-  }
+  // return true;
+  // }
 
 }
