@@ -10,7 +10,7 @@ import java.sql.Statement;
 import DomainModel.Student;
 
 // this class opens and closes database connection
-// executes all 4 CRUD statements.
+// executes all 4 CRUD statements. 
 
 public class DatabaseConnection {
 
@@ -23,7 +23,10 @@ public class DatabaseConnection {
 
     try {
       // database URL
-      String connectionUrl = "jdbc:sqlserver://localhost\\MSSQLSERVER;databaseName=Codecademy;integratedSecurity=true;";
+
+      Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+      String connectionUrl = "jdbc:sqlserver://localhost\\MSSQLSERVER;databaseName=CodecademyStudent;integratedSecurity=true;";
 
       conn = DriverManager.getConnection(connectionUrl);
 
