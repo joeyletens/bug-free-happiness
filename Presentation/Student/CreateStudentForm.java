@@ -1,6 +1,7 @@
 package Presentation.Student;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import ApplicationLogic.StudentController;
 import DomainModel.Student;
@@ -79,11 +80,32 @@ public class CreateStudentForm {
     createStudentBtn.setMinSize(buttonWidth, buttonHeight);
     createStudentBtn.setOnAction(e -> {
 
-      Student student = new Student(email.getText(), firstName.getText(), lastName.getText(), dateOfBirth.getText(),
-          gender.getValue(), street.getText(), houseNumber.getText(), postalCode.getText(), city.getText(),
-          country.getText());
+      System.out.println("Add button called");
+
+      String varEmail = email.getText();
+      String varFirstName = firstName.getText();
+      String varLastName = lastName.getText();
+      String varDateOfBirth = dateOfBirth.getText();
+      String varGender = gender.getValue();
+      String varStreet = street.getText();
+      String varHouseNumber = houseNumber.getText();
+      String varPostalCode = postalCode.getText();
+      String varCity = city.getText();
+      String varCountry = country.getText();
+
+      System.out.println("Variables created");
+
+      Student student = new Student(varEmail, varFirstName, varLastName, varDateOfBirth, varGender, varStreet,
+          varHouseNumber, varPostalCode, varCity, varCountry);
+
+      System.out.println("Student created");
       try {
-        StudentController.create(student);
+        if (student != null) {
+          StudentController.create(student);
+          System.out.println("StudentController method called");
+        } else {
+          System.out.println("Creating student object does not work");
+        }
       } catch (SQLException e1) {
         // TODO Auto-generated catch block
         e1.printStackTrace();
