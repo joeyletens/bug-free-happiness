@@ -1,21 +1,11 @@
 package DataStorageLayer;
 
-import DomainModel.Student;
-
 public interface StudentDAOInf {
-  public static boolean create() {
-    return false;
-  }
+  public boolean create();
 
-  public static String read() {
-    return null;
-  }
+  public String read();
 
-  public static boolean update() {
-    return false;
-  }
+  public boolean update();
 
-  public static boolean delete() {
-    return false;
-  }
+  public boolean delete();
 }

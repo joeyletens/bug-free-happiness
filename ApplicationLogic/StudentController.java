@@ -10,33 +10,26 @@ import DomainModel.Student;
 
 public class StudentController implements ControllerInterface {
 
-  // Used to create a new student gets called by the GUI
-  public static boolean create(Student student) throws SQLException {
-    // TODO Auto-generated method stub
-    // if (DataStorageLayer.MySQLStudentDAO.create(student)) {
-    // Presentation.InfoBox("Added successful", student.getFirstName() + " " +
-    // student.getLastName());
-    // return true;
-    // } else {
-    // Presentation.InfoBox("Added failed", "Oh no");
-    // }
-    return false;
-  }
-
-  // Used to read a new student gets called by the GUI
-  public static void read(String email) {
-    // TODO Auto-generated method stub
-
-  }
-
-  // Used to update a new student gets called by the GUI
-  public static boolean update(String email) {
+  @Override
+  public boolean create() {
     // TODO Auto-generated method stub
     return false;
   }
 
-  // Used to delete a new student gets called by the GUI
-  public static boolean delete(String email) {
+  @Override
+  public String read() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public boolean update() {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  @Override
+  public boolean delete() {
     // TODO Auto-generated method stub
     return false;
   }
