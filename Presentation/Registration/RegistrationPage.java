@@ -41,19 +41,22 @@ public class RegistrationPage {
     // Button to read student
     Button read = new Button("Read");
     registrationScreen.add(read, 1, 2);
-    // read.setOnAction(e -> CreateNewScene.changeScene(ReadStudentForm.GUI()));
+    ReadRegistrationForm readRegistrationForm = new ReadRegistrationForm();
+    read.setOnAction(e -> CreateNewScene.changeScene(readRegistrationForm.GUI()));
     read.setMinSize(buttonWidth, buttonHeight);
 
     // Button to see the statistics
     Button update = new Button("Update");
     registrationScreen.add(update, 0, 3);
-    // update.setOnAction(e -> CreateNewScene.changeScene(UpdateStudentForm.GUI()));
+    UpdateRegistrationForm updateRegistrationForm = new UpdateRegistrationForm();
+    update.setOnAction(e -> CreateNewScene.changeScene(updateRegistrationForm.GUI()));
     update.setMinSize(buttonWidth, buttonHeight);
 
     // Button to go to registration page
     Button delete = new Button("Delete");
     registrationScreen.add(delete, 1, 3);
-    // delete.setOnAction(e -> CreateNewScene.changeScene(DeleteStudentForm.GUI()));
+    DeleteRegistrationForm deleteRegistrationForm = new DeleteRegistrationForm();
+    delete.setOnAction(e -> CreateNewScene.changeScene(deleteRegistrationForm.GUI()));
     delete.setMinSize(buttonWidth, buttonHeight);
 
     // Button to see the statistics
