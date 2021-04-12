@@ -2,6 +2,10 @@ package Presentation.Student;
 
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+
+import java.sql.SQLException;
+
+import ApplicationLogic.StudentController;
 import Presentation.CreateNewScene;
 import javafx.geometry.*;
 
@@ -29,13 +33,19 @@ public class DeleteStudentForm {
     backToStudentPage.setOnAction(e -> CreateNewScene.changeScene(StudentPage.GUI()));
     form.add(backToStudentPage, 0, 3);
 
-    // Creates a new student when pressed on the button
+    // deletes a new student when pressed on the button
 
-    Button createStudentBtn = new Button("Get data");
-    createStudentBtn.setOnAction(e -> {
-
+    Button deleteStudentBtn = new Button("Delete");
+    deleteStudentBtn.setOnAction(e -> {
+      StudentController studentController = new StudentController();
+      try {
+        studentController.delete(email.getText());
+      } catch (SQLException e1) {
+        // TODO Auto-generated catch block
+        e1.printStackTrace();
+      }
     });
-    form.add(createStudentBtn, 2, 3);
+    form.add(deleteStudentBtn, 2, 3);
 
     return form;
   }

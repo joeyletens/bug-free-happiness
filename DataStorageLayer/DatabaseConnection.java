@@ -23,6 +23,7 @@ public class DatabaseConnection {
 
   private final String SQL_INSERT = "INSERT INTO StudentVerticalSlice VALUES (?, ?, ? ,? , ?, ?, ?, ?, ?, ?);";
   private final String SQL_SELECT = "SELECT * FROM StudentVerticalSlice WHERE email = ?;";
+  private final String SQL_DELETE = "DELETE FROM StudentVerticalSlice WHERE email = ?;";
   private PreparedStatement ps;
 
   // // Executes insert statement
@@ -95,8 +96,27 @@ public class DatabaseConnection {
     }
   }
 
-  public boolean ExecuteDeleteStatement() throws SQLException {
+  public boolean ExecuteDeleteStatement(String email) throws SQLException {
+    try {
+      // If entered email does not exist
+      if (ExecuteSelectStatement(email) == null) {
+        return false;
+      }
+      // Import, get connection, create prepared statement
+      Class.forName(JDBC_DRIVER);
+      conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+      ps = conn.prepareStatement(SQL_DELETE);
 
+      // Set email in prepared statement
+      ps.setString(1, email);
+
+      // Execute delete statement
+      ps.executeUpdate();
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      return false;
+    }
     return true;
   }
 

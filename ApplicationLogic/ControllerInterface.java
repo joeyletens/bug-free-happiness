@@ -11,5 +11,5 @@ public interface ControllerInterface {
 
   public boolean update();
 
-  public boolean delete(String email);
+  public void delete(String email) throws SQLException;
 }
