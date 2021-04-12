@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import DomainModel.Student;
-import Presentation.InfoBox;
 
 // this class opens and closes database connection
 // executes all 4 CRUD statements. 
@@ -28,7 +27,6 @@ public class DatabaseConnection {
 
   // // Executes insert statement
   public boolean ExecuteInsertStatement(Student student) throws SQLException {
-
     try {
       // import and get connection
       Class.forName(JDBC_DRIVER);
@@ -49,41 +47,29 @@ public class DatabaseConnection {
 
       // Execute the prepared statement
       ps.executeUpdate();
-
-      // Display the students first and last name on a pop-up screen
-      InfoBox.Display("Added student", student.getFirstName() + " " + student.getLastName());
-
       return true;
 
     } catch (Exception e) {
       e.printStackTrace();
       return false;
-    } finally {
-      if (conn != null) {
-        conn.close();
-      }
-      if (ps != null) {
-        ps.close();
-      }
     }
   }
 
   // // excute the prepared statement
   public ResultSet ExecuteSelectStatement(String email) throws SQLException {
-
     try {
-
+      // import and connect to database
       Class.forName(JDBC_DRIVER);
-
       conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
 
       // Create prepatedStatement
       ps = conn.prepareStatement(SQL_SELECT);
-
       ps.setString(1, email);
 
+      // execute select and put it in a resultset
       rs = ps.executeQuery();
 
+      // Check if result is not empty
       if (rs.next()) {
         return rs;
       } else {
