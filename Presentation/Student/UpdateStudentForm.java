@@ -3,18 +3,15 @@ package Presentation.Student;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import Presentation.CreateNewScene;
-import Presentation.PresentationInf;
 import javafx.geometry.*;
 
-public class UpdateStudentForm implements PresentationInf {
+public class UpdateStudentForm {
 
-  TextField email;
-  Button cancel, add;
+  static TextField email;
+  static Button cancel, add;
 
   // UPDATE STUDENT DATA
-  public GridPane GUI() {
-    CreateNewScene createNewScene = new CreateNewScene();
-    // TODO Auto-generated method stub
+  public static GridPane GUI() {
 
     GridPane form = new GridPane();
     form.setHgap(25);
@@ -29,8 +26,7 @@ public class UpdateStudentForm implements PresentationInf {
 
     // Create back to student page button
     Button backToStudentPage = new Button("Back to student page");
-    StudentPage studentPage = new StudentPage();
-    backToStudentPage.setOnAction(e -> createNewScene.changeScene(studentPage.GUI()));
+    backToStudentPage.setOnAction(e -> CreateNewScene.changeScene(StudentPage.GUI()));
     form.add(backToStudentPage, 0, 3);
 
     // Creates a new student when pressed on the button

@@ -1,22 +1,22 @@
 package Presentation.Student;
 
+import java.sql.SQLException;
+
+import DataStorageLayer.DatabaseConnection;
+import DomainModel.Student;
 import Presentation.CreateNewScene;
-import Presentation.PresentationInf;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.geometry.*;
 
-public class CreateStudentForm implements PresentationInf {
+public class CreateStudentForm {
 
-  private TextField email, firstName, lastName, dateOfBirth, postalCode, street, houseNumber, city, country;
-  private Button backToStudentPage, createStudentBtn;
-  private int buttonWidth = 30;
-  private int buttonHeight = 10;
+  private static TextField email, firstName, lastName, dateOfBirth, postalCode, street, houseNumber, city, country;
+  private static Button backToStudentPage, createStudentBtn;
+  private static int buttonWidth = 30;
+  private static int buttonHeight = 10;
 
-  public GridPane GUI() {
-    CreateNewScene createNewScene = new CreateNewScene();
-    // TODO Auto-generated method stub
-
+  public static GridPane GUI() {
     GridPane form = new GridPane();
     form.setHgap(25);
     form.setVgap(10);
@@ -66,8 +66,7 @@ public class CreateStudentForm implements PresentationInf {
     form.add(country, 3, 10, 3, 1);
 
     backToStudentPage = new Button("Back to student page");
-    StudentPage studentPage = new StudentPage();
-    backToStudentPage.setOnAction(e -> createNewScene.changeScene((studentPage.GUI())));
+    backToStudentPage.setOnAction(e -> CreateNewScene.changeScene((StudentPage.GUI())));
     backToStudentPage.setMinSize(buttonWidth, buttonHeight);
     form.add(backToStudentPage, 0, 11, 3, 1);
 
@@ -77,6 +76,18 @@ public class CreateStudentForm implements PresentationInf {
     createStudentBtn.setMinSize(buttonWidth, buttonHeight);
     createStudentBtn.setOnAction(e -> {
       // nothing
+      Student student = new Student(email.getText(), firstName.getText(), lastName.getText(), dateOfBirth.getText(),
+          gender.getValue(), postalCode.getText(), street.getText(), houseNumber.getText(), city.getText(),
+          country.getText());
+
+      DatabaseConnection dao = new DatabaseConnection();
+      try {
+        dao.ExecuteInsertStatement(student);
+      } catch (SQLException e1) {
+        // TODO Auto-generated catch block
+        e1.printStackTrace();
+      }
+
     });
     form.add(createStudentBtn, 3, 11, 3, 1);
     return form;

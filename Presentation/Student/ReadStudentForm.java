@@ -1,20 +1,20 @@
 package Presentation.Student;
 
+import java.sql.SQLException;
+
+import ApplicationLogic.StudentController;
 import Presentation.CreateNewScene;
-import Presentation.PresentationInf;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.geometry.*;
 
-public class ReadStudentForm implements PresentationInf {
+public class ReadStudentForm {
 
-  TextField email;
-  Button cancel, add;
+  static TextField email;
+  static Button cancel, add;
 
   // GET STUDENT DATA
-  public GridPane GUI() {
-    CreateNewScene createNewScene = new CreateNewScene();
-    // TODO Auto-generated method stub
+  public static GridPane GUI() {
 
     GridPane form = new GridPane();
     form.setHgap(25);
@@ -29,16 +29,21 @@ public class ReadStudentForm implements PresentationInf {
 
     // Create back to student page button
     Button backToStudentPage = new Button("Back to student page");
-    StudentPage studentPage = new StudentPage();
-    backToStudentPage.setOnAction(e -> createNewScene.changeScene(studentPage.GUI()));
+    backToStudentPage.setOnAction(e -> CreateNewScene.changeScene(StudentPage.GUI()));
     form.add(backToStudentPage, 0, 3);
 
     // Creates a new student when pressed on the button
-
     Button createStudentBtn = new Button("Get data");
     createStudentBtn.setOnAction(e -> {
-
+      StudentController studentController = new StudentController();
+      try {
+        studentController.read(email.getText());
+      } catch (SQLException e1) {
+        // TODO Auto-generated catch block
+        e1.printStackTrace();
+      }
     });
+
     form.add(createStudentBtn, 2, 3);
 
     return form;
