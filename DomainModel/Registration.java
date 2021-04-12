@@ -13,4 +13,28 @@ public class Registration {
     this.applacationDate = applacationDate;
   }
 
+  public String getCourseName() {
+    return courseName;
+  }
+
+  public void setCourseName(String courseName) {
+    this.courseName = courseName;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public Date getApplacationDate() {
+    return applacationDate;
+  }
+
+  public void setApplacationDate(Date applacationDate) {
+    this.applacationDate = applacationDate;
+  }
+
 }
