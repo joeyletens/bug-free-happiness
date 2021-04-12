@@ -1,16 +1,15 @@
 package DomainModel;
 
-import java.sql.Date;
-
 public class Registration {
   private String courseName;
   private String email;
-  private Date applacationDate;
+  private String applicationDate;
 
-  public Registration(String courseName, String email, Date applacationDate) {
+  public Registration(String courseName, String email, String applicationDate) {
     this.courseName = courseName;
     this.email = email;
-    this.applacationDate = applacationDate;
+    this.applicationDate = applicationDate;
+
   }
 
   public String getCourseName() {
@@ -29,12 +28,12 @@ public class Registration {
     this.email = email;
   }
 
-  public Date getApplacationDate() {
-    return applacationDate;
+  public String getApplicationDate() {
+    return applicationDate;
   }
 
-  public void setApplacationDate(Date applacationDate) {
-    this.applacationDate = applacationDate;
+  public void setApplicationDate(String applicationDate) {
+    this.applicationDate = applicationDate;
   }
 
 }
