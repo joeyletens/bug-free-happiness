@@ -1,16 +1,39 @@
 package DomainModel;
 
-import java.sql.Date;
-
 public class Registration {
   private String courseName;
   private String email;
-  private Date applacationDate;
+  private String applicationDate;
 
-  public Registration(String courseName, String email, Date applacationDate) {
+  public Registration(String courseName, String email, String applicationDate) {
     this.courseName = courseName;
     this.email = email;
-    this.applacationDate = applacationDate;
+    this.applicationDate = applicationDate;
+
+  }
+
+  public String getCourseName() {
+    return courseName;
+  }
+
+  public void setCourseName(String courseName) {
+    this.courseName = courseName;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public String getApplicationDate() {
+    return applicationDate;
+  }
+
+  public void setApplicationDate(String applicationDate) {
+    this.applicationDate = applicationDate;
   }
 
 }

@@ -8,13 +8,22 @@ public class ContentItem {
   private String status;
   private String description;
   private int duration;
-  private int progress;
+  protected int progress;
 
-  public ContentItem(int contentId, Date publicationDate, String status, String description) {
+  public ContentItem(int contentId, Date publicationDate, String status, String description, int duration) {
     this.contentId = contentId;
     this.publicationDate = publicationDate;
     this.status = status;
     this.description = description;
+    this.duration = duration;
+  }
+
+  public int getProgress() {
+    return progress;
+  }
+
+  public void setProgress(int progress) {
+    this.progress = progress;
   }
 
 }
