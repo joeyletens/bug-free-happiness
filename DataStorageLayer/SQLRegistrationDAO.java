@@ -6,12 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import DomainModel.Student;
+import DomainModel.Registration;
 
 // this class opens and closes database connection
 // executes all 4 CRUD statements. 
 
-public class SQLStudentDAO {
+public class SQLRegistrationDAO {
 
   // Databse connection login and import
   private final String DB_USERNAME = "sa";
@@ -20,8 +20,8 @@ public class SQLStudentDAO {
   private final String JDBC_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
   // The CRUD prepared statements
-  private final String SQL_INSERT = "INSERT INTO StudentVerticalSlice VALUES (?, ?, ? ,? , ?, ?, ?, ?, ?, ?);";
-  private final String SQL_SELECT = "SELECT * FROM StudentVerticalSlice WHERE email = ?;";
+  private final String SQL_INSERT = "INSERT INTO StudentVerticalSlice VALUES (?, ?, ?);";
+  private final String SQL_SELECT = "SELECT * FROM StudentVerticalSlice WHERE email = ? AND coursename = ? AND applicationdate = ?;";
   private final String SQL_DELETE = "DELETE FROM StudentVerticalSlice WHERE email = ?;";
   private final String SQL_UPDATE = "UPDATE StudentVerticalSlice SET email = ? WHERE email = ?;";
 
@@ -30,23 +30,16 @@ public class SQLStudentDAO {
   private ResultSet rs;
 
   // // Executes insert statement
-  public boolean ExecuteInsertStatement(Student student) throws SQLException {
+  public boolean ExecuteInsertStatement(Registration registration) throws SQLException {
     try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
       // import and get connection
       Class.forName(JDBC_DRIVER);
       ps = conn.prepareStatement(SQL_INSERT);
 
       // Added paramter values to prepared statement
-      ps.setString(1, student.getEmail());
-      ps.setString(2, student.getFirstName());
-      ps.setString(3, student.getLastName());
-      ps.setString(4, student.getDateOfBirth());
-      ps.setString(5, student.getGender());
-      ps.setString(6, student.getStreet());
-      ps.setString(7, student.getHousenumber());
-      ps.setString(8, student.getPostalCode());
-      ps.setString(9, student.getCity());
-      ps.setString(10, student.getCountry());
+      ps.setString(1, registration.getEmail());
+      ps.setString(2, registration.getCourseName());
+      ps.setString(3, registration.getApplacationDate().toString());
 
       // Execute the prepared statement
       ps.executeUpdate();
@@ -126,14 +119,16 @@ public class SQLStudentDAO {
     }
   }
 
-  public boolean CheckIfStudentExists(String email) throws SQLException {
+  public boolean checkIfRegistrationExists(Registration registration) throws SQLException {
     try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
       // import and connect to database
       Class.forName(JDBC_DRIVER);
 
       // Create prepatedStatement
       ps = conn.prepareStatement(SQL_SELECT);
-      ps.setString(1, email);
+      ps.setString(1, registration.getEmail());
+      ps.setString(2, registration.getCourseName());
+      ps.setString(3, registration.getApplacationDate().toString());
 
       // execute select and put it in a resultset
       rs = ps.executeQuery();
