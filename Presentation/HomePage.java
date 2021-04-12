@@ -1,7 +1,7 @@
 package Presentation;
 
 import Presentation.Course.CoursePage;
-import Presentation.Course.WebcastPage;
+import Presentation.Registration.RegistrationPage;
 import Presentation.Statistics.StatisticsPage;
 import Presentation.Student.StudentPage;
 import javafx.scene.control.*;
@@ -50,11 +50,11 @@ public class HomePage {
     courseBtn.setMinSize(buttonWidth, buttonHeight);
 
     // Button to go to webcast page
-    Button webcastBtn = new Button("Webcasts");
-    buttonList.add(webcastBtn, 0, 3);
-    WebcastPage webcastPage = new WebcastPage();
-    webcastBtn.setOnAction(e -> CreateNewScene.changeScene(webcastPage.GUI()));
-    webcastBtn.setMinSize(buttonWidth, buttonHeight);
+    Button registrationBtn = new Button("Registration");
+    buttonList.add(registrationBtn, 0, 3);
+    RegistrationPage registrationPage = new RegistrationPage();
+    registrationBtn.setOnAction(e -> CreateNewScene.changeScene(registrationPage.GUI()));
+    registrationBtn.setMinSize(buttonWidth, buttonHeight);
 
     // Button to see the statistics
     Button statisticsBtn = new Button("Statistics");

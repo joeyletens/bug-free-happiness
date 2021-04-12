@@ -1,20 +1,15 @@
 package Presentation.Statistics;
 
 import Presentation.CreateNewScene;
-import Presentation.HomePage;
 import Presentation.PresentationInf;
-import Presentation.Course.CoursePage;
-import Presentation.Student.CreateStudentForm;
-import Presentation.Student.StudentPage;
-import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.geometry.*;
 
 public class StatisticsPage implements PresentationInf {
   // Standard button sizes
-  private int buttonWidth = 180;
-  private int buttonHeight = 50;
+  private static int buttonWidth = 180;
+  private static int buttonHeight = 50;
 
   // Class to return a borderpane of the HomePage, return a layout
   public GridPane GUI() {

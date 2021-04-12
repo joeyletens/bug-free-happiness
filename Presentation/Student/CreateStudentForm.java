@@ -3,6 +3,7 @@ package Presentation.Student;
 import java.sql.SQLException;
 
 import ApplicationLogic.StudentController;
+
 import DomainModel.Student;
 import Presentation.CreateNewScene;
 import javafx.scene.control.*;

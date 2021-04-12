@@ -39,13 +39,6 @@ public class CoursePage implements PresentationInf {
     // Scene(modulesBtnStudentForm.studentForm())));
     modulesBtn.setMinSize(buttonWidth, buttonHeight);
 
-    // To sign up a new student
-    Button signupBtn = new Button("Enroll");
-    courseScreen.add(signupBtn, 1, 2);
-    // signupBtn.setOnAction(e -> CreateNewScene.changeScene(new
-    // Scene(signupBtnStudentForm.studentForm())));
-    signupBtn.setMinSize(buttonWidth, buttonHeight);
-
     // To sign out a studentS
     Button signoutBtn = new Button("Sign out");
     courseScreen.add(signoutBtn, 0, 3);
