@@ -3,7 +3,7 @@ package ApplicationLogic;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import DataStorageLayer.DatabaseConnection;
+import DataStorageLayer.SQLStudentDAO;
 import DomainModel.Student;
 import Presentation.InfoBox;
 
@@ -11,7 +11,7 @@ import Presentation.InfoBox;
 // the class implements de ControllerInterface 
 
 public class StudentController implements ControllerInterface {
-  DatabaseConnection dao = new DatabaseConnection();
+  SQLStudentDAO dao = new SQLStudentDAO();
   StringBuilder message;
 
   @Override
@@ -43,8 +43,12 @@ public class StudentController implements ControllerInterface {
 
   @Override
   public void update(String email, String newEmail) throws SQLException {
-    // TODO Auto-generated method stub
-
+    boolean result = dao.ExecuteUpdateStatement(email, newEmail);
+    if (result) {
+      InfoBox.Display("Updated student", "student's email: " + email + "\n" + "has been updated to: " + newEmail);
+    } else {
+      InfoBox.Display("Student not updated", "A student with this email does not exist");
+    }
   }
 
   @Override
