@@ -1,12 +1,11 @@
 package Presentation.Statistics;
 
 import Presentation.CreateNewScene;
-import Presentation.PresentationInf;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.geometry.*;
 
-public class StatisticsPage implements PresentationInf {
+public class StatisticsPage {
   // Standard button sizes
   private static int buttonWidth = 180;
   private static int buttonHeight = 50;
