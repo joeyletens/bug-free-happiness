@@ -1,5 +1,8 @@
 package Presentation.Registration;
 
+import java.sql.SQLException;
+
+import ApplicationLogic.RegistrationController;
 import Presentation.CreateNewScene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -19,7 +22,7 @@ public class CreateRegistrationForm {
     form.setPadding(new Insets(15, 25, 15, 25));
 
     // Title
-    form.add(new Label("CREATE: Enter registration details below"), 0, 0, 5, 1);
+    form.add(new Label("CREATE: Enter registration details below"), 0, 0, 3, 1);
 
     // Add student email box
     form.add(new Label("Email:"), 0, 1);
@@ -36,17 +39,24 @@ public class CreateRegistrationForm {
     RegistrationPage registrationPage = new RegistrationPage();
     backToRegistrationPage.setOnAction(e -> CreateNewScene.changeScene((registrationPage.GUI())));
     backToRegistrationPage.setMinSize(buttonWidth, buttonHeight);
-    form.add(backToRegistrationPage, 0, 5, 3, 1);
+    form.add(backToRegistrationPage, 0, 5);
 
     // Creates a new Registration when pressed on the button
 
     createRegistrationBtn = new Button("Enroll");
     createRegistrationBtn.setMinSize(buttonWidth, buttonHeight);
     createRegistrationBtn.setOnAction(e -> {
-      // nothing
+
+      RegistrationController registrationController = new RegistrationController();
+      try {
+        registrationController.create(email.getText(), courseName.getText());
+      } catch (SQLException e1) {
+        // TODO Auto-generated catch block
+        e1.printStackTrace();
+      }
 
     });
-    form.add(createRegistrationBtn, 3, 5, 3, 1);
+    form.add(createRegistrationBtn, 3, 5);
     return form;
 
   }
