@@ -2,7 +2,7 @@ package Presentation.Student;
 
 import java.sql.SQLException;
 
-import DataStorageLayer.DatabaseConnection;
+import ApplicationLogic.StudentController;
 import DomainModel.Student;
 import Presentation.CreateNewScene;
 import javafx.scene.control.*;
@@ -80,9 +80,9 @@ public class CreateStudentForm {
           gender.getValue(), postalCode.getText(), street.getText(), houseNumber.getText(), city.getText(),
           country.getText());
 
-      DatabaseConnection dao = new DatabaseConnection();
+      StudentController studentController = new StudentController();
       try {
-        dao.ExecuteInsertStatement(student);
+        studentController.create(student);
       } catch (SQLException e1) {
         // TODO Auto-generated catch block
         e1.printStackTrace();

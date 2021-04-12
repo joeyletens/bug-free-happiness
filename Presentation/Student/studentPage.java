@@ -12,13 +12,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 public class StudentPage {
+  static GridPane studentScreen;
 
   // Method to create and return a gridpane with buttons for the studentpage
   public static GridPane GUI() {
     int buttonWidth = 120;
     int buttonHeight = 50;
     // Create button list
-    GridPane studentScreen = new GridPane();
+    studentScreen = new GridPane();
     studentScreen.setHgap(20);
     studentScreen.setVgap(20);
     studentScreen.setPadding(new Insets(20, 30, 20, 30));
