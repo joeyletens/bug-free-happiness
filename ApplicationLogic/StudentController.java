@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import DataStorageLayer.DatabaseConnection;
+import DomainModel.Student;
 import Presentation.InfoBox;
 
 // Studentcontroller creates, reads, deletes or updates a student class
@@ -14,9 +15,13 @@ public class StudentController implements ControllerInterface {
   StringBuilder message;
 
   @Override
-  public boolean create() {
-    // TODO Auto-generated method stub
-    return false;
+  public void create(Student student) throws SQLException {
+    boolean result = dao.ExecuteInsertStatement(student);
+    if (result) {
+      InfoBox.Display("Added student", student.getFirstName() + " " + student.getLastName() + " has been added");
+    } else {
+      InfoBox.Display("Student not added", "A student with this email already exists");
+    }
   }
 
   @Override
@@ -37,9 +42,9 @@ public class StudentController implements ControllerInterface {
   }
 
   @Override
-  public boolean update() {
+  public void update(String email, String newEmail) throws SQLException {
     // TODO Auto-generated method stub
-    return false;
+
   }
 
   @Override
@@ -48,7 +53,7 @@ public class StudentController implements ControllerInterface {
     if (result) {
       InfoBox.Display("Deleted student", "Student (" + email + ") has been successfully deleted");
     } else {
-      InfoBox.Display("Not deleted",
+      InfoBox.Display("Student not deleted",
           "Student (" + email + ") was not deleted, \n" + "there was no student found with this email");
     }
   }
