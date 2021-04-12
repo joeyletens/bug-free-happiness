@@ -1,22 +1,18 @@
 package Presentation.Course;
 
 import Presentation.CreateNewScene;
-import Presentation.PresentationInf;
 import javafx.geometry.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
-public class CoursePage implements PresentationInf {
-
+public class CoursePage {
   private int buttonWidth = 120;
   private int buttonHeight = 50;
 
-  // Method to create and return a gridpane with buttons for the studentpage
+  // Method to create and return a gridpane with buttons for the coursespage
   public GridPane GUI() {
-    CreateNewScene createNewScene = new CreateNewScene();
-
-    // Create button list
+    // Create course screen
     GridPane courseScreen = new GridPane();
     courseScreen.setHgap(20);
     courseScreen.setVgap(20);
@@ -35,25 +31,25 @@ public class CoursePage implements PresentationInf {
     // To view different modules
     Button modulesBtn = new Button("View Modules");
     courseScreen.add(modulesBtn, 0, 2);
-    // modulesBtn.setOnAction(e -> CreateNewScene.changeScene(new
-    // Scene(modulesBtnStudentForm.studentForm())));
+    ModulesPage modulesPage = new ModulesPage();
+    modulesBtn.setOnAction(e -> CreateNewScene.changeScene(modulesPage.GUI()));
     modulesBtn.setMinSize(buttonWidth, buttonHeight);
 
-    // To sign out a studentS
-    Button signoutBtn = new Button("Sign out");
-    courseScreen.add(signoutBtn, 0, 3);
-    // signoutBtn.setOnAction(e -> CreateNewScene.changeScene(new
-    // Scene(signoutBtnStudentForm.studentForm())));
-    signoutBtn.setMinSize(buttonWidth, buttonHeight);
+    // To view different webcasts
+    Button webcastsBtn = new Button("View webcasts");
+    courseScreen.add(webcastsBtn, 1, 2);
+    WebcastPage webcastPage = new WebcastPage();
+    webcastsBtn.setOnAction(e -> CreateNewScene.changeScene(webcastPage.GUI()));
+    webcastsBtn.setMinSize(buttonWidth, buttonHeight);
 
     // Button to see the statistics
     Button home = new Button("Homepage");
-    courseScreen.add(home, 1, 3);
-    home.setOnAction(e -> createNewScene.setHomePage());
+    courseScreen.add(home, 0, 3, 3, 1);
+    home.setOnAction(e -> CreateNewScene.setHomePage());
     home.setMinSize(buttonWidth, buttonHeight);
 
+    // Set layout and return the courseScreen
     courseScreen.setAlignment(Pos.CENTER);
-
     return courseScreen;
   }
 }
