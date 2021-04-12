@@ -10,11 +10,10 @@ import Presentation.InfoBox;
 // Studentcontroller creates, reads, deletes or updates a student class
 // the class implements de ControllerInterface 
 
-public class StudentController implements ControllerInterface {
+public class StudentController {
   SQLStudentDAO dao = new SQLStudentDAO();
   StringBuilder message;
 
-  @Override
   public void create(Student student) throws SQLException {
     boolean result = dao.ExecuteInsertStatement(student);
     if (result) {
@@ -24,7 +23,6 @@ public class StudentController implements ControllerInterface {
     }
   }
 
-  @Override
   public void read(String email) throws SQLException {
     ResultSet rs = dao.ExecuteSelectStatement(email);
     if (rs == null) {
@@ -41,7 +39,6 @@ public class StudentController implements ControllerInterface {
     }
   }
 
-  @Override
   public void update(String email, String newEmail) throws SQLException {
     boolean result = dao.ExecuteUpdateStatement(email, newEmail);
     if (result) {
@@ -51,7 +48,6 @@ public class StudentController implements ControllerInterface {
     }
   }
 
-  @Override
   public void delete(String email) throws SQLException {
     boolean result = dao.ExecuteDeleteStatement(email);
     if (result) {
