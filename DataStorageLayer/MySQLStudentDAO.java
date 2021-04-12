@@ -1,14 +1,14 @@
 package DataStorageLayer;
 
-import java.sql.*;
+import DomainModel.Student;
 
 // This is the student DAO
-// Here are the queries made which are used to manage the database
+// Here are the queries made which are used to manag
 
 public class MySQLStudentDAO implements StudentDAOInf {
 
   @Override
-  public boolean create() {
+  public boolean create(Student student) {
     // TODO Auto-generated method stub
     return false;
   }
