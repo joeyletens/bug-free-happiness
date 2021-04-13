@@ -52,37 +52,73 @@ public class PostalCodeTest {
   @Test
   public void testFormatPostalCodeRequiresPostalCodeTenThousandEnsuresPostalCodeBelowTenThousand() {
     // Arrange
-    String postalCode = "9999 AA";
+    String postalCode = "9999AA";
 
     // Act
     String result = PostalCode.formatPostalCode(postalCode);
 
     // Assert
-    assertEquals("9999 AA", result);
+    assertEquals("9999AA", result);
   }
 
   @Test
-  public void testFormatPostalCodeRequiresPostalCodeTwoLettersAtTheEndEnsuresPostalCodeHasTwoLettersAtTheEnd() {
+  public void testFormatPostalCodeRequiresPostalCodeWithASpaceBeforeThePostalCodeEnsuresValidPostalCode() {
     // Arrange
-    String postalCode = "4200 AA";
+    String postalCode = " 1000AA";
 
     // Act
     String result = PostalCode.formatPostalCode(postalCode);
 
     // Assert
-    assertEquals("4200 AA", result);
+    assertEquals("1000AA", result);
   }
 
   @Test
   public void testFormatPostalCodeRequiresLowerCaseLettersEnsuresPutLettersToUpperCase() {
     // Arrange
-    String postalCode = "6969 az";
+    String postalCode = "1000AA ";
 
     // Act
     String result = PostalCode.formatPostalCode(postalCode);
 
     // Assert
-    assertEquals("6969 AZ", result);
+    assertEquals("1000AA", result);
+  }
+
+  @Test
+  public void testFormatPostalCodeRequiresPostalCodeWithASpaceInTheFirstPartEnsureValidPostalCode() {
+    // Arrange
+    String postalCode = "10 00AA";
+
+    // Act
+    String result = PostalCode.formatPostalCode(postalCode);
+
+    // Assert
+    assertEquals("1000AA", result);
+  }
+
+  @Test
+  public void testFormatPostalCodeRequiresPostCodeWithSpaceBetweenTheLetters() {
+    // Arrange
+    String postalCode = "1000A A";
+
+    // Act
+    String result = PostalCode.formatPostalCode(postalCode);
+
+    // Assert
+    assertEquals("1000AA", result);
+  }
+
+  @Test
+  public void testFormatPostalCodeRequiresPostCodeWithLowerCaseLettersEnsureValidPostalCodeWithUpperCase() {
+    // Arrange
+    String postalCode = "1000aa";
+
+    // Act
+    String result = PostalCode.formatPostalCode(postalCode);
+
+    // Assert
+    assertEquals("1000AA", result);
   }
 
   /**
@@ -92,27 +128,27 @@ public class PostalCodeTest {
    */
 
   @Test(expected = IllegalArgumentException.class)
-  public void testFormatPostalCodeRequiresThreeNumbersAndTwoLettersEnsureIllegalArgumentException() {
+  public void testFormatPostalCodeRequiresThreeNumbersAndTwoLettersSignalsIllegalArgumentException() {
     // Arrange
-    String postalCode = "420 NS";
+    String postalCode = "999AA";
 
     // Act
     String result = PostalCode.formatPostalCode(postalCode);
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testFormatPostalCodeRequiresFiveNumbersAndTwoLettersEnsureIllegalArgumentException() {
+  public void testFormatPostalCodeRequiresFiveNumbersAndTwoLettersSignalsIllegalArgumentException() {
     // Arrange
-    String postalCode = "42069 NS";
+    String postalCode = "99999AA";
 
     // Act
     String result = PostalCode.formatPostalCode(postalCode);
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testFormatPostalCodeRequiresFourNumbersAndOneLettersEnsureIllegalArgumentException() {
+  public void testFormatPostalCodeRequiresFourNumbersAndOneLettersSignalsIllegalArgumentException() {
     // Arrange
-    String postalCode = "4206 N";
+    String postalCode = "1000A";
 
     // Act
     String result = PostalCode.formatPostalCode(postalCode);
@@ -120,9 +156,36 @@ public class PostalCodeTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testFormatPostalCodeRequiresFourNumbersAndThreeLettersEnsureIllegalArgumentException() {
+  public void testFormatPostalCodeRequiresFourNumbersAndThreeLettersSignalsIllegalArgumentException() {
     // Arrange
-    String postalCode = "3200 BRO ";
+    String postalCode = "1000AAA";
+
+    // Act
+    String result = PostalCode.formatPostalCode(postalCode);
+  }
+
+  public void testFormatPostalCodeRequiresEmptyPostalCodeSignalsIllegalArgumentException() {
+    // Arrange
+    String postalCode = "";
+
+    // Act
+    String result = PostalCode.formatPostalCode(postalCode);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testFormatPostalCodeRequiresOnlyNumbersSignalsIllegalArgumentException() {
+    // Arrange
+    String postalCode = "1000";
+
+    // Act
+    String result = PostalCode.formatPostalCode(postalCode);
+
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testFormatPostalCodeRequiresOnlyLettersSignalsIllegalArgumentException() {
+    // Arrange
+    String postalCode = "AA";
 
     // Act
     String result = PostalCode.formatPostalCode(postalCode);
