@@ -17,4 +17,36 @@ public class Modules extends ContentItem {
     this.courseNumber = courseNumber;
   }
 
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public String getVersion() {
+    return version;
+  }
+
+  public void setVersion(String version) {
+    this.version = version;
+  }
+
+  public String getContactPersonEmail() {
+    return contactPersonEmail;
+  }
+
+  public void setContactPersonEmail(String contactPersonEmail) {
+    this.contactPersonEmail = contactPersonEmail;
+  }
+
+  public int getCourseNumber() {
+    return courseNumber;
+  }
+
+  public void setCourseNumber(int courseNumber) {
+    this.courseNumber = courseNumber;
+  }
+
 }
