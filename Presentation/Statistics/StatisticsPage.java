@@ -7,8 +7,8 @@ import javafx.geometry.*;
 
 public class StatisticsPage {
   // Standard button sizes
-  private static int buttonWidth = 180;
-  private static int buttonHeight = 50;
+  private int buttonWidth = 180;
+  private int buttonHeight = 50;
 
   // Class to return a borderpane of the HomePage, return a layout
   public GridPane GUI() {
@@ -60,7 +60,7 @@ public class StatisticsPage {
     // Button to see the homePage
     Button homePageBtn = new Button("Homepage");
     buttonList.add(homePageBtn, 0, 6);
-    homePageBtn.setOnAction(e -> createNewScene.setHomePage());
+    homePageBtn.setOnAction(e -> CreateNewScene.setHomePage());
     homePageBtn.setMinSize(buttonWidth, buttonHeight);
 
     return buttonList;
