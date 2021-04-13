@@ -26,9 +26,14 @@ public class PostalCode {
    * @signals (IllegalArgumentException); }
    * 
    */
-  public static String formatPostalCode(/* non_null */ String postalCode) {
+  public static boolean formatPostalCode(/* non_null */ String postalCode) {
 
-    return null;
+    String regex = " *[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2} *";
+    if (postalCode.toLowerCase().matches(regex)) {
+      return true;
+    } else {
+      return false;
+    }
 
   }
 }
