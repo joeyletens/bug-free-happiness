@@ -42,9 +42,23 @@ public class CoursePage {
     webcastsBtn.setOnAction(e -> CreateNewScene.changeScene(webcastPage.GUI()));
     webcastsBtn.setMinSize(buttonWidth, buttonHeight);
 
+    // To view different modules
+    Button modulesProgressBtn = new Button("Progress Modules");
+    courseScreen.add(modulesProgressBtn, 0, 3);
+    ProgressModulesPage progressModulesPage = new ProgressModulesPage();
+    modulesProgressBtn.setOnAction(e -> CreateNewScene.changeScene(progressModulesPage.GUI()));
+    modulesProgressBtn.setMinSize(buttonWidth, buttonHeight);
+
+    // To view different webcasts
+    Button progressWebcastBtn = new Button("Progress webcasts");
+    courseScreen.add(progressWebcastBtn, 1, 3);
+    ProgressWebcastPage progressWebcastPage = new ProgressWebcastPage();
+    progressWebcastBtn.setOnAction(e -> CreateNewScene.changeScene(progressWebcastPage.GUI()));
+    progressWebcastBtn.setMinSize(buttonWidth, buttonHeight);
+
     // Button to see the statistics
     Button home = new Button("Homepage");
-    courseScreen.add(home, 0, 3, 3, 1);
+    courseScreen.add(home, 0, 4, 3, 1);
     home.setOnAction(e -> CreateNewScene.setHomePage());
     home.setMinSize(buttonWidth, buttonHeight);
 
