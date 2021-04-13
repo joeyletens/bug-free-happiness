@@ -26,13 +26,16 @@ public class PostalCode {
    * @signals (IllegalArgumentException); }
    * 
    */
-  public static boolean formatPostalCode(/* non_null */ String postalCode) {
+  public static String formatPostalCode(/* non_null */ String postalCode) {
 
-    String regex = " *[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2} *";
-    if (postalCode.toLowerCase().matches(regex)) {
-      return true;
+    String newPostalCode = postalCode.trim().substring(0, 4) + " "
+        + postalCode.trim().substring(4).trim().toUpperCase();
+
+    String regex = " *[1-9][0-9]{3} ?(?!SA|SD|SS)[A-Z]{2} *";
+    if (newPostalCode.matches(regex)) {
+      return newPostalCode;
     } else {
-      return false;
+      throw new IllegalArgumentException("Invalid postalcode (" + postalCode + ")");
     }
 
   }
