@@ -13,24 +13,12 @@ public class MailToolsTest {
    * @ensures \result = false; }
    */
   @Test
-  public void testValidateMailAddressRequiresOneAtCharacterEnsuresFalse() {
+  public void testValidateEmailRequiresNoAtEnsuresFalse() {
     // Arrange
-    String mailAddress = "fakeemail@gmail.com";
+    String email = "@gmail.com";
 
     // Act
-    String result = MailTools.validateMailAddress(mailAddress);
-
-    // Assert
-    assertEquals(false, result);
-  }
-
-  @Test
-  public void testValidateMailAddressRequiresAtCharacterAsSecondEnsuresFalse() {
-    // Arrange
-    String mailAddress = "f@akeemailgmail.com";
-
-    // Act
-    String result = MailTools.validateMailAddress(mailAddress);
+    boolean result = MailTools.validateMailAddress(email);
 
     // Assert
     assertEquals(false, result);
@@ -43,12 +31,12 @@ public class MailToolsTest {
    * @ensures \result = false; }
    */
   @Test
-  public void testValidateMailAddressRequiresTwoDotsEnsuresFalse() {
+  public void testValidateEmailRequiresTwoDotsEnsuresFalse() {
     // Arrange
-    String mailAddress = "fakeemail@gm.ail.com";
+    String email = "email@gmail.com.nl";
 
     // Act
-    String result = MailTools.validateMailAddress(mailAddress);
+    boolean result = MailTools.validateMailAddress(email);
 
     // Assert
     assertEquals(false, result);
@@ -61,12 +49,12 @@ public class MailToolsTest {
    * @ensures \result = false; }
    */
   @Test
-  public void testValidateMailAddressRequiresOneCharacterBetweenAtAndDotEnsuresFalse() {
+  public void testValidateMailAddressRequiresNoCharacterBetweenAtAndDotEnsuresFalse() {
     // Arrange
-    String mailAddress = "renzeremmers@g.com";
+    String email = "email@.com";
 
     // Act
-    String result = MailTools.validateMailAddress(mailAddress);
+    boolean result = MailTools.validateMailAddress(email);
     // Assert
     assertEquals(false, result);
   }
@@ -78,12 +66,12 @@ public class MailToolsTest {
    * @ensures \result = false; }
    */
   @Test
-  public void testValidationMailAddressRequiresOneCharacterAfterDotEnsuresFalse() {
+  public void testValidationMailAddressRequiresNoCharacterAfterDotEnsuresFalse() {
     // Arrange
-    String mailAddress = "renzoremmers@gmail.c";
+    String email = "email@gmail.";
 
     // Act
-    String result = MailTools.validateMailAddress(mailAddress);
+    boolean result = MailTools.validateMailAddress(email);
 
     // Assert
     assertEquals(false, result);
@@ -98,10 +86,10 @@ public class MailToolsTest {
   @Test
   public void testValidationMailAddressRequiresNoOtherPreconditionEnsuresTrue() {
     // Arrange
-    String mailAddress = "RenzoRemmers@gmail.com";
+    String email = "email@gmail.com";
 
     // Act
-    String result = MailTools.validateMailAddress(mailAddress);
+    boolean result = MailTools.validateMailAddress(email);
 
     // Assert
     assertEquals(true, result);

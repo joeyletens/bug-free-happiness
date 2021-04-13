@@ -29,8 +29,13 @@ public class MailTools {
    * @ensures \result = true; }
    * 
    */
-  public static String validateMailAddress(String mailAddress) {
+  public static boolean validateMailAddress(String email) {
+    String regex = "^(.+)@(.+)/.(.+)$";
 
-    return null;
+    if (email.matches(regex)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
