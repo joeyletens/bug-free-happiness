@@ -7,7 +7,7 @@ import javafx.geometry.*;
 
 public class WebcastPage {
   // Create different variables
-  private TextField email, title, contentId, progress;
+  private TextField email, contentId;
   private Button backToCoursePage, createCourseBtn;
   private int buttonWidth = 30;
   private int buttonHeight = 10;
@@ -26,30 +26,20 @@ public class WebcastPage {
     email = new TextField();
     form.add(email, 0, 2, 3, 1);
 
-    // Add course title box
-    form.add(new Label("Title:"), 0, 3);
-    title = new TextField();
-    form.add(title, 0, 4, 3, 1);
-
     // Add course contentId box
-    form.add(new Label("ContentId:"), 0, 5);
+    form.add(new Label("ContentId:"), 0, 3);
     contentId = new TextField();
-    form.add(contentId, 0, 6, 3, 1);
-
-    // Add course progress made my student box
-    form.add(new Label("Progress:"), 0, 7);
-    progress = new TextField();
-    form.add(progress, 0, 8, 3, 1);
+    form.add(contentId, 0, 4, 3, 1);
 
     // Go back to Course page
     backToCoursePage = new Button("Back to Course page");
     CoursePage coursePage = new CoursePage();
     backToCoursePage.setOnAction(e -> CreateNewScene.changeScene((coursePage.GUI())));
     backToCoursePage.setMinSize(buttonWidth, buttonHeight);
-    form.add(backToCoursePage, 0, 9);
+    form.add(backToCoursePage, 0, 5);
 
     // Creates a new Course when pressed on the button
-    createCourseBtn = new Button("Make progress");
+    createCourseBtn = new Button("View progress");
     createCourseBtn.setMinSize(buttonWidth, buttonHeight);
     createCourseBtn.setOnAction(e -> {
 
@@ -62,7 +52,7 @@ public class WebcastPage {
       // }
 
     });
-    form.add(createCourseBtn, 2, 9);
+    form.add(createCourseBtn, 2, 5);
     return form;
 
   }
