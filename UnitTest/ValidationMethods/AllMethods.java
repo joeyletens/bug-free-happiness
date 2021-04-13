@@ -23,18 +23,8 @@ public class AllMethods {
     }
   }
 
-  static String genderValidation(String gender) {
-    String regex = " *(m|f|o) *";
-    if (gender.toLowerCase().matches(regex)) {
-      return "gender is valid";
-    } else {
-      return "gender is invalid";
-    }
-  }
-
   static String dateOfBirthValidation(String dateOfBirth) {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
-
     try {
       formatter.parse(dateOfBirth);
       return "date of birth is invalid";
@@ -44,6 +34,9 @@ public class AllMethods {
   }
 
   static String percentageValidation(int percentage) {
+    if (percentage >= -1 && percentage <= 100) {
+      return "correct";
+    }
     return "incorrect";
   }
 }
