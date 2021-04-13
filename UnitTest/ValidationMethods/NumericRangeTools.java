@@ -19,7 +19,7 @@ public class NumericRangeTools {
    * 
    */
   public static boolean isValidPercentage(int percentage) {
-    if (percentage >= -1 && percentage <= 100) {
+    if (0 <= percentage && percentage <= 100) {
       return true;
     }
     return false;
