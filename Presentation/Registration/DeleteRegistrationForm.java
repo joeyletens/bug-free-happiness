@@ -48,7 +48,7 @@ public class DeleteRegistrationForm {
     form.add(backToRegistrationPage, 0, 7);
 
     // Creates a new Registration when pressed on the button
-    createRegistrationBtn = new Button("Sign out");
+    createRegistrationBtn = new Button("Delete");
     createRegistrationBtn.setMinSize(buttonWidth, buttonHeight);
     createRegistrationBtn.setOnAction(e -> {
 
