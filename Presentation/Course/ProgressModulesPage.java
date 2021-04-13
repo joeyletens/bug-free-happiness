@@ -1,5 +1,7 @@
 package Presentation.Course;
 
+import ApplicationLogic.CourseController;
+import DomainModel.Viewed;
 import Presentation.CreateNewScene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -48,13 +50,9 @@ public class ProgressModulesPage {
     createCourseBtn.setMinSize(buttonWidth, buttonHeight);
     createCourseBtn.setOnAction(e -> {
 
-      // CourseController courseController = new CourseController();
-      // try {
-      // courseController.read(email.getText());
-      // } catch (SQLException e1) {
-      // // TODO Auto-generated catch block
-      // e1.printStackTrace();
-      // }
+      Viewed viewed = new Viewed(Integer.parseInt(contentId.getText()), email.getText());
+      CourseController courseController = new CourseController();
+      courseController.makeProgressInModule(Integer.parseInt(progress.getText()), viewed);
 
     });
     form.add(createCourseBtn, 2, 7);
