@@ -16,6 +16,7 @@ public class ContentItem {
     this.status = status;
     this.description = description;
     this.duration = duration;
+    this.progress = 0;
   }
 
   public int getProgress() {
