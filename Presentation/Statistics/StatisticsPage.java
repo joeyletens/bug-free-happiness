@@ -7,13 +7,11 @@ import javafx.geometry.*;
 
 public class StatisticsPage {
   // Standard button sizes
-  private int buttonWidth = 180;
+  private int buttonWidth = 160;
   private int buttonHeight = 50;
 
   // Class to return a borderpane of the HomePage, return a layout
   public GridPane GUI() {
-    CreateNewScene createNewScene = new CreateNewScene();
-
     // Create button list
     GridPane buttonList = new GridPane();
     buttonList.setHgap(20);
@@ -28,38 +26,39 @@ public class StatisticsPage {
     // Label for text
     Label text = new Label("Select what you would like to do or view");
     text.setStyle("-fx-font: 14 arial;");
-    buttonList.add(text, 0, 1);
+    buttonList.add(text, 0, 1, 2, 1);
 
-    // Button to add student
-    Button averageProgressBtn = new Button("Average progress per module");
+    // Button to add average progress button
+    Button averageProgressBtn = new Button("Average progress per\nmodule");
     buttonList.add(averageProgressBtn, 0, 2);
-    // averageProgressBtn.setOnAction(e -> CreateNewScene.changeScene(new
-    // Scene(averageProgressPage.averageProgressCRUD())));
+    AverageProgress averageProgress = new AverageProgress();
+    averageProgressBtn.setOnAction(e -> CreateNewScene.changeScene(averageProgress.GUI()));
     averageProgressBtn.setMinSize(buttonWidth, buttonHeight);
 
-    Button studentProgressBtn = new Button("Student progress per module");
-    buttonList.add(studentProgressBtn, 0, 3);
-    // studentProgressBtn.setOnAction(e -> CreateNewScene.changeScene(new
-    // Scene(studentProgressPage.studentProgressCRUD())));
+    // button to view student porgress per module
+    Button studentProgressBtn = new Button("Student progress per\nmodule");
+    buttonList.add(studentProgressBtn, 1, 2);
+    StudentProgress studentProgress = new StudentProgress();
+    studentProgressBtn.setOnAction(e -> CreateNewScene.changeScene(studentProgress.GUI()));
     studentProgressBtn.setMinSize(buttonWidth, buttonHeight);
 
-    // Button to go to course page
-    Button courseBtn = new Button("Top 3 most viewed webcast");
-    buttonList.add(courseBtn, 0, 4);
-    // courseBtn.setOnAction(e -> CreateNewScene.changeScene(new
-    // Scene(CoursePage.createCoursePage())));
-    courseBtn.setMinSize(buttonWidth, buttonHeight);
+    // Button to go to top 3 most viewed page
+    Button topThreeBtn = new Button("Top 3 most viewed\nwebcast");
+    buttonList.add(topThreeBtn, 0, 3);
+    TopThree topThree = new TopThree();
+    topThreeBtn.setOnAction(e -> CreateNewScene.changeScene(topThree.GUI()));
+    topThreeBtn.setMinSize(buttonWidth, buttonHeight);
 
-    // Button to go to webcast page
-    Button webcastBtn = new Button("Students who passed a course");
-    buttonList.add(webcastBtn, 0, 5);
-    // webcastBtn.setOnAction(e -> CreateNewScene.changeScene(new
-    // Scene(CoursePage.createCoursePage())));
-    webcastBtn.setMinSize(buttonWidth, buttonHeight);
+    // Button to go to amount of student swho passed a course page
+    Button passedStudentsBtn = new Button("Amout of students who\npassed a course");
+    buttonList.add(passedStudentsBtn, 1, 3);
+    PassedStudents passedStudents = new PassedStudents();
+    passedStudentsBtn.setOnAction(e -> CreateNewScene.changeScene(passedStudents.GUI()));
+    passedStudentsBtn.setMinSize(buttonWidth, buttonHeight);
 
     // Button to see the homePage
     Button homePageBtn = new Button("Homepage");
-    buttonList.add(homePageBtn, 0, 6);
+    buttonList.add(homePageBtn, 0, 4);
     homePageBtn.setOnAction(e -> CreateNewScene.setHomePage());
     homePageBtn.setMinSize(buttonWidth, buttonHeight);
 

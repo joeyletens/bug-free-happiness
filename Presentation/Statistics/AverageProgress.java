@@ -1,19 +1,18 @@
-package Presentation.Registration;
+package Presentation.Statistics;
 
-import java.sql.SQLException;
-
-import ApplicationLogic.RegistrationController;
+import ApplicationLogic.StatisticsController;
 import Presentation.CreateNewScene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.geometry.*;
 
-public class CreateRegistrationForm {
+public class AverageProgress {
 
-  private TextField email, courseName;
-  private Button backToRegistrationPage, createRegistrationBtn;
+  private TextField courseName;
+  private Button backToStatisticsPage, createStatisticsBtn;
   private int buttonWidth = 30;
   private int buttonHeight = 10;
+  StatisticsController statisticsController = new StatisticsController();
 
   public GridPane GUI() {
     GridPane form = new GridPane();
@@ -22,33 +21,27 @@ public class CreateRegistrationForm {
     form.setPadding(new Insets(15, 25, 15, 25));
 
     // Title
-    form.add(new Label("CREATE: Enter registration details below"), 0, 0, 3, 1);
-
-    // Add student email box
-    form.add(new Label("Email:"), 0, 1);
-    email = new TextField();
-    form.add(email, 0, 2, 3, 1);
+    form.add(new Label("VIEW: Enter statistics details below"), 0, 0, 3, 1);
 
     // Add course name box
-    form.add(new Label("Course name:"), 0, 3);
+    form.add(new Label("Course name:"), 0, 1);
     courseName = new TextField();
-    form.add(courseName, 0, 4, 3, 1);
+    form.add(courseName, 0, 2, 3, 1);
 
-    // Go back to registration page
-    backToRegistrationPage = new Button("Back to registration page");
-    RegistrationPage registrationPage = new RegistrationPage();
-    backToRegistrationPage.setOnAction(e -> CreateNewScene.changeScene((registrationPage.GUI())));
-    backToRegistrationPage.setMinSize(buttonWidth, buttonHeight);
-    form.add(backToRegistrationPage, 0, 5);
+    // Go back to Statistics page
+    backToStatisticsPage = new Button("Back to statistics page");
+    StatisticsPage statisticsPage = new StatisticsPage();
+    backToStatisticsPage.setOnAction(e -> CreateNewScene.changeScene((statisticsPage.GUI())));
+    backToStatisticsPage.setMinSize(buttonWidth, buttonHeight);
+    form.add(backToStatisticsPage, 0, 3);
 
-    // Creates a new Registration when pressed on the button
-
-    createRegistrationBtn = new Button("Enroll");
-    createRegistrationBtn.setMinSize(buttonWidth, buttonHeight);
-    createRegistrationBtn.setOnAction(e -> {
-
+    // Creates a new Statistics when pressed on the button
+    createStatisticsBtn = new Button("View");
+    createStatisticsBtn.setMinSize(buttonWidth, buttonHeight);
+    createStatisticsBtn.setOnAction(e -> {
+      statisticsController.averageProgressPerModule(courseName.getText());
     });
-    form.add(createRegistrationBtn, 3, 5);
+    form.add(createStatisticsBtn, 3, 3);
     return form;
 
   }
