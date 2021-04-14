@@ -13,7 +13,7 @@ public class SQLCourseDAO {
   // Databse connection login and import
   private final String DB_USERNAME = "sa";
   private final String DB_PASSWORD = "QuattroIsLeuk";
-  private final String DB_URL = "jdbc:sqlserver://localhost\\MSSQLSERVER;databaseName=CodecademyStudent";
+  private final String DB_URL = "jdbc:sqlserver://localhost\\MSSQLSERVER;databaseName=QuatroCodecademy";
   private final String JDBC_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
   // The CRUD prepared statements
