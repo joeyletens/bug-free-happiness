@@ -11,7 +11,7 @@ import javafx.geometry.*;
 
 public class UpdateRegistrationForm {
 
-  private TextField email, courseName, date;
+  private TextField email, courseName, dateDay, dateMonth, dateYear;
   private Button backToRegistrationPage, createRegistrationBtn;
   private int buttonWidth = 30;
   private int buttonHeight = 10;
@@ -37,8 +37,12 @@ public class UpdateRegistrationForm {
 
     // Add date box
     form.add(new Label("Date: "), 0, 5);
-    date = new TextField();
-    form.add(date, 0, 6, 3, 1);
+    dateDay = new TextField("dd");
+    form.add(dateDay, 0, 6, 1, 1);
+    dateMonth = new TextField("mm");
+    form.add(dateMonth, 1, 6, 1, 1);
+    dateYear = new TextField("yyyy");
+    form.add(dateYear, 2, 6, 1, 1);
 
     // Go back to registration page
     backToRegistrationPage = new Button("Back to registration page");
@@ -51,9 +55,11 @@ public class UpdateRegistrationForm {
     createRegistrationBtn = new Button("Update");
     createRegistrationBtn.setMinSize(buttonWidth, buttonHeight);
     createRegistrationBtn.setOnAction(e -> {
+      StringBuilder date = new StringBuilder();
+      date.append(dateDay.getText()).append("-").append(dateMonth.getText()).append("-").append(dateYear.getText());
 
       // Create a registration object
-      Registration registration = new Registration(courseName.getText(), email.getText(), date.getText());
+      Registration registration = new Registration(courseName.getText(), email.getText(), date.toString());
       RegistrationController registrationController = new RegistrationController();
       try {
         registrationController.update(registration);

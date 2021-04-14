@@ -7,6 +7,8 @@ import java.sql.SQLException;
 
 import ApplicationLogic.StudentController;
 import Presentation.CreateNewScene;
+import Presentation.InfoBox;
+import UnitTest.ValidationMethods.MailTools;
 import javafx.geometry.*;
 
 public class UpdateStudentForm {
@@ -39,13 +41,17 @@ public class UpdateStudentForm {
     form.add(backToStudentPage, 0, 5);
 
     // Creates a new student when pressed on the button
-    Button createStudentBtn = new Button("Get data");
+    Button createStudentBtn = new Button("Update");
     createStudentBtn.setOnAction(e -> {
-      StudentController studentController = new StudentController();
-      try {
-        studentController.update(email.getText(), newEmail.getText());
-      } catch (SQLException e1) {
-        e1.printStackTrace();
+      if (!MailTools.validateMailAddress(newEmail.getText())) {
+        InfoBox.Display("Incorrect email", "email is not in a correct form");
+      } else {
+        StudentController studentController = new StudentController();
+        try {
+          studentController.update(email.getText(), newEmail.getText());
+        } catch (SQLException e1) {
+          e1.printStackTrace();
+        }
       }
     });
     form.add(createStudentBtn, 2, 5);
