@@ -28,6 +28,7 @@ public class SQLStudentDAO {
   // Prepared statement and resultset pre defined
   private PreparedStatement ps;
   private ResultSet rs;
+  Connection connSelect;
 
   // // Executes insert statement
   public boolean ExecuteInsertStatement(Student student) throws SQLException {
@@ -65,12 +66,12 @@ public class SQLStudentDAO {
 
   // // excute the prepared statement
   public ResultSet ExecuteSelectStatement(String email) throws SQLException {
-    try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
-      // import and connect to database
-      Class.forName(JDBC_DRIVER);
+    try {
+      connSelect = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
 
-      // Create prepatedStatement
-      ps = conn.prepareStatement(SQL_SELECT);
+      // import and get connection
+      Class.forName(JDBC_DRIVER);
+      ps = connSelect.prepareStatement(SQL_SELECT);
       ps.setString(1, email);
 
       // execute select and put it in a resultset
