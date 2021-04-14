@@ -35,7 +35,7 @@ public class PostalCode {
     if (newPostalCode.matches(regex)) {
       return newPostalCode;
     } else {
-      throw new IllegalArgumentException("Invalid postalcode (" + postalCode + ")");
+      return null;
     }
 
   }
