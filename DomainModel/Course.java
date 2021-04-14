@@ -7,10 +7,10 @@ public class Course {
   private String courseName;
   private String subject;
   private String introductionText;
-  private String courseLevel;
+  private Level courseLevel;
   private ArrayList<Course> relatedCourses;
 
-  public Course(int idNumber, String courseName, String subject, String introductionText, String courseLevel) {
+  public Course(int idNumber, String courseName, String subject, String introductionText, Level courseLevel) {
     this.idNumber = idNumber;
     this.courseName = courseName;
     this.subject = subject;
@@ -50,11 +50,11 @@ public class Course {
     this.introductionText = introductionText;
   }
 
-  public String getCourseLevel() {
+  public Level getCourseLevel() {
     return courseLevel;
   }
 
-  public void setCourseLevel(String courseLevel) {
+  public void setCourseLevel(Level courseLevel) {
     this.courseLevel = courseLevel;
   }
 
