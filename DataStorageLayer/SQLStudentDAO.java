@@ -113,6 +113,11 @@ public class SQLStudentDAO {
 
   public boolean ExecuteUpdateStatement(String email, String newEmail) throws SQLException {
     try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
+
+      if (!CheckIfStudentExists(email)) {
+        return false;
+      }
+
       // import and get connection
       Class.forName(JDBC_DRIVER);
       ps = conn.prepareStatement(SQL_UPDATE);
@@ -133,10 +138,6 @@ public class SQLStudentDAO {
 
   public boolean CheckIfStudentExists(String email) throws SQLException {
     try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
-
-      if (CheckIfStudentExists(email)) {
-        return false;
-      }
 
       // import and connect to database
       Class.forName(JDBC_DRIVER);
