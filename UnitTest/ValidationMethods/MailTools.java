@@ -30,7 +30,7 @@ public class MailTools {
    * 
    */
   public static boolean validateMailAddress(String email) {
-    String regex = "^(.+)@(.+)/.(.+)$";
+    String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?!-)(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
 
     if (email.matches(regex)) {
       return true;
