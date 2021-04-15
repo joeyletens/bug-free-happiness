@@ -86,7 +86,7 @@ public class SQLRegistrationDAO {
       Class.forName(JDBC_DRIVER);
 
       // Check if exists
-      if (!checkIfRegistrationExists(registration)) {
+      if (ExecuteSelectStatement(registration.getEmail()) == null) {
         return false;
       }
 
@@ -94,9 +94,9 @@ public class SQLRegistrationDAO {
       ps = conn.prepareStatement(SQL_DELETE);
 
       // Prepare statement
-      ps.setString(2, registration.getEmail());
-      ps.setString(3, registration.getCourseName());
-      ps.setString(1, registration.getApplicationDate());
+      ps.setString(1, registration.getEmail());
+      ps.setString(2, registration.getCourseName());
+      ps.setString(3, registration.getApplicationDate());
 
       // Execute delete statement
       ps.executeUpdate();
@@ -111,31 +111,31 @@ public class SQLRegistrationDAO {
   public boolean ExecuteUpdateStatement(Registration registration) throws SQLException {
     try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
       // import and get connection
-      Class.forName(JDBC_DRIVER);
 
       // Check if exists
-      if (!checkIfRegistrationExists(registration)) {
+      if (ExecuteSelectStatement(registration.getEmail()) == null) {
         return false;
       }
 
       // Create registration controller to get current date
+      Class.forName(JDBC_DRIVER);
       registrationController = new RegistrationController();
 
       // Prepare statement
       ps = conn.prepareStatement(SQL_UPDATE);
-      ps.setString(3, registration.getEmail());
-      ps.setString(4, registration.getCourseName());
-      ps.setString(2, registration.getApplicationDate());
       ps.setString(1, registrationController.getDate());
+      ps.setString(2, registration.getEmail());
+      ps.setString(3, registration.getCourseName());
+      ps.setString(4, registration.getApplicationDate());
 
       // Execute the prepared statement
       ps.executeUpdate();
-      return true;
 
     } catch (Exception e) {
       e.printStackTrace();
       return false;
     }
+    return true;
   }
 
   public boolean checkIfRegistrationExists(Registration registration) throws SQLException {
