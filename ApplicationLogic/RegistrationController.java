@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 import DataStorageLayer.SQLCourseDAO;
 import DataStorageLayer.SQLRegistrationDAO;
@@ -23,7 +24,7 @@ public class RegistrationController {
   // Returns todays date
   public String getDate() {
     LocalDate date = LocalDate.now(); // Create a date object
-    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     String formattedDate = date.format(format);
     return formattedDate;
   }
@@ -31,23 +32,12 @@ public class RegistrationController {
   public void create(String email, String coursename) throws SQLException {
     // Create new registration
     Registration registration = new Registration(email, coursename, getDate());
-
-    // Check if student, course or registration exist
-    if (!studentDAO.CheckIfStudentExists(registration.getEmail())) {
-      InfoBox.Display(notAdded, "This student does not exist");
-    } else if (!courseDAO.checkIfCourseExists(registration.getCourseName())) {
-      InfoBox.Display(notAdded, "This course does not exist");
-    } else if (!dao.checkIfRegistrationExists(registration)) {
-      InfoBox.Display(notAdded, "A registration with this email for\nthis course on this date already exists");
+    boolean result = dao.ExecuteInsertStatement(registration);
+    if (result) {
+      InfoBox.Display("Added registration on ", registration.getCourseName() + " for " + registration.getEmail());
     } else {
-      boolean result = dao.ExecuteInsertStatement(registration);
-      if (result) {
-        InfoBox.Display("Added registration on ", registration.getCourseName() + " for " + registration.getEmail());
-      } else {
-        InfoBox.Display(notAdded, "Failed to enroll student to course");
-      }
+      InfoBox.Display(notAdded, "Failed to enroll student to course");
     }
-
   }
 
   public void read(String email) throws SQLException {
@@ -59,14 +49,18 @@ public class RegistrationController {
     } else {
       // else read through the whole list
       selectList = new StringBuilder();
+      ArrayList<String> registrations = new ArrayList<>();
       while (rs.next()) {
-        selectList.append("===============================");
-        selectList.append("Date: " + rs.getString(1) + "\n");
-        selectList.append("Email: " + rs.getString(2) + "\n");
-        selectList.append("Student: " + rs.getString(3) + "\n");
-        selectList.append("===============================");
+        selectList.append("===============================\n").append("Date: " + rs.getString(1) + "\n")
+            .append("Student: " + rs.getString(3) + "\n").append("===============================\n");
+        registrations.add(selectList.toString());
       }
-      InfoBox.Display("Registrations found", selectList.toString());
+      StringBuilder createView = new StringBuilder();
+      for (int i = 0; i < registrations.size(); i++) {
+        createView.append(registrations.get(i) + "\n");
+      }
+
+      InfoBox.Display("Registrations found", createView.toString());
     }
   }
 
