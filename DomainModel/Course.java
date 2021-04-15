@@ -16,6 +16,17 @@ public class Course {
     this.subject = subject;
     this.introductionText = introductionText;
     this.courseLevel = courseLevel;
+    relatedCourses = new ArrayList<>();
+  }
+
+  public ArrayList<Course> getRelatedCourses() {
+    return relatedCourses;
+  }
+
+  public void addRelatedCourses(Course course) {
+    if (!relatedCourses.contains(course)) {
+      relatedCourses.add(course);
+    }
   }
 
   public int getIdNumber() {
@@ -56,14 +67,6 @@ public class Course {
 
   public void setCourseLevel(Level courseLevel) {
     this.courseLevel = courseLevel;
-  }
-
-  public ArrayList<Course> getRelatedCourses() {
-    return relatedCourses;
-  }
-
-  public void setRelatedCourses(ArrayList<Course> relatedCourses) {
-    this.relatedCourses = relatedCourses;
   }
 
 }
