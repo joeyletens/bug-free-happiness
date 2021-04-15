@@ -59,7 +59,7 @@ public class DeleteRegistrationForm {
       date.append(dateDay.getText()).append("-").append(dateMonth.getText()).append("-").append(dateYear.getText());
 
       // Create a registration object
-      Registration registration = new Registration(courseName.getText(), email.getText(), date.toString());
+      Registration registration = new Registration(email.getText(), courseName.getText(), date.toString());
       RegistrationController registrationController = new RegistrationController();
       try {
         registrationController.delete(registration);

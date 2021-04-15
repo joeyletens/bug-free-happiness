@@ -5,7 +5,7 @@ public class Registration {
   private String email;
   private String applicationDate;
 
-  public Registration(String courseName, String email, String applicationDate) {
+  public Registration(String email, String courseName, String applicationDate) {
     this.courseName = courseName;
     this.email = email;
     this.applicationDate = applicationDate;
