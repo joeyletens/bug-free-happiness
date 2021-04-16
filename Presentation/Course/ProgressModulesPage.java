@@ -34,7 +34,7 @@ public class ProgressModulesPage {
     form.add(contentId, 0, 4, 3, 1);
 
     // Add course progress made my student box
-    form.add(new Label("Progress:"), 0, 5);
+    form.add(new Label("Progress made:"), 0, 5);
     progress = new TextField();
     form.add(progress, 0, 6, 3, 1);
 

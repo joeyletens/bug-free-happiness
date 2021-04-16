@@ -23,31 +23,24 @@ public class RegistrationController {
   // Returns todays date
   public String getDate() {
     LocalDate date = LocalDate.now(); // Create a date object
-    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     String formattedDate = date.format(format);
     return formattedDate;
   }
 
   public void create(String email, String coursename) throws SQLException {
     // Create new registration
+    boolean result = false;
     Registration registration = new Registration(email, coursename, getDate());
-
-    // Check if student, course or registration exist
-    if (!studentDAO.CheckIfStudentExists(registration.getEmail())) {
-      InfoBox.Display(notAdded, "This student does not exist");
-    } else if (!courseDAO.checkIfCourseExists(registration.getCourseName())) {
-      InfoBox.Display(notAdded, "This course does not exist");
-    } else if (!dao.checkIfRegistrationExists(registration)) {
-      InfoBox.Display(notAdded, "A registration with this email for\nthis course on this date already exists");
-    } else {
-      boolean result = dao.ExecuteInsertStatement(registration);
-      if (result) {
-        InfoBox.Display("Added registration on ", registration.getCourseName() + " for " + registration.getEmail());
-      } else {
-        InfoBox.Display(notAdded, "Failed to enroll student to course");
-      }
+    if (courseDAO.checkIfCourseExists(coursename) && studentDAO.CheckIfStudentExists(email)) {
+      result = dao.ExecuteInsertStatement(registration);
     }
 
+    if (result) {
+      InfoBox.Display("Added registration on ", registration.getCourseName() + " for " + registration.getEmail());
+    } else {
+      InfoBox.Display(notAdded, "Failed to enroll student to course");
+    }
   }
 
   public void read(String email) throws SQLException {
@@ -59,20 +52,24 @@ public class RegistrationController {
     } else {
       // else read through the whole list
       selectList = new StringBuilder();
+      selectList.append("===============================\n").append("Date: " + rs.getString(1) + "\n")
+          .append("Student: " + rs.getString(2) + "\n").append("Course: " + rs.getString(3) + "\n")
+          .append("===============================\n");
       while (rs.next()) {
-        selectList.append("===============================");
-        selectList.append("Date: " + rs.getString(1) + "\n");
-        selectList.append("Email: " + rs.getString(2) + "\n");
-        selectList.append("Student: " + rs.getString(3) + "\n");
-        selectList.append("===============================");
+        selectList.append("===============================\n").append("Date: " + rs.getString(1) + "\n")
+            .append("Student: " + rs.getString(2) + "\n").append("Course: " + rs.getString(3) + "\n")
+            .append("===============================\n");
+
       }
+
       InfoBox.Display("Registrations found", selectList.toString());
     }
   }
 
   public void update(Registration registration) throws SQLException {
     // Check if registration exist
-    boolean result = dao.checkIfRegistrationExists(registration);
+    boolean result = false;
+    result = dao.ExecuteUpdateStatement(registration);
     if (result) {
       // If true update registration to todays date and display result
       InfoBox.Display("Updated Registration",
@@ -84,7 +81,9 @@ public class RegistrationController {
   }
 
   public void delete(Registration registration) throws SQLException {
-    if (dao.ExecuteDeleteStatement(registration)) {
+    boolean result = false;
+    result = dao.ExecuteDeleteStatement(registration);
+    if (result) {
       InfoBox.Display("Deleted Registration", registration.getEmail() + " has been successfully deleted from\n"
           + registration.getCourseName() + " who registrered on " + registration.getApplicationDate());
     } else {

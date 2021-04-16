@@ -28,7 +28,15 @@ public class PostalCode {
    */
   public static String formatPostalCode(/* non_null */ String postalCode) {
 
-    return null;
+    String newPostalCode = postalCode.trim().substring(0, 4) + " "
+        + postalCode.trim().substring(4).trim().toUpperCase();
+
+    String regex = " *[1-9][0-9]{3} ?(?!SA|SD|SS)[A-Z]{2} *";
+    if (newPostalCode.matches(regex)) {
+      return newPostalCode;
+    } else {
+      return null;
+    }
 
   }
 }

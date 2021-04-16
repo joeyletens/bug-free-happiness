@@ -11,7 +11,7 @@ import javafx.geometry.*;
 
 public class DeleteRegistrationForm {
 
-  private TextField email, courseName, date;
+  private TextField email, courseName, dateDay, dateMonth, dateYear;
   private Button backToRegistrationPage, createRegistrationBtn;
   private int buttonWidth = 30;
   private int buttonHeight = 10;
@@ -37,8 +37,12 @@ public class DeleteRegistrationForm {
 
     // Add date box
     form.add(new Label("Date: "), 0, 5);
-    date = new TextField();
-    form.add(date, 0, 6, 3, 1);
+    dateDay = new TextField("dd");
+    form.add(dateDay, 0, 6, 1, 1);
+    dateMonth = new TextField("mm");
+    form.add(dateMonth, 1, 6, 1, 1);
+    dateYear = new TextField("yyyy");
+    form.add(dateYear, 2, 6, 1, 1);
 
     // Go back to registration page
     backToRegistrationPage = new Button("Back to registration page");
@@ -48,12 +52,14 @@ public class DeleteRegistrationForm {
     form.add(backToRegistrationPage, 0, 7);
 
     // Creates a new Registration when pressed on the button
-    createRegistrationBtn = new Button("Sign out");
+    createRegistrationBtn = new Button("Delete");
     createRegistrationBtn.setMinSize(buttonWidth, buttonHeight);
     createRegistrationBtn.setOnAction(e -> {
+      StringBuilder date = new StringBuilder();
+      date.append(dateDay.getText()).append("-").append(dateMonth.getText()).append("-").append(dateYear.getText());
 
       // Create a registration object
-      Registration registration = new Registration(courseName.getText(), email.getText(), date.getText());
+      Registration registration = new Registration(email.getText(), courseName.getText(), date.toString());
       RegistrationController registrationController = new RegistrationController();
       try {
         registrationController.delete(registration);

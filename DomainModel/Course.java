@@ -3,27 +3,28 @@ package DomainModel;
 import java.util.ArrayList;
 
 public class Course {
-  private int idNumber;
   private String courseName;
   private String subject;
   private String introductionText;
-  private String courseLevel;
+  private Level courseLevel;
   private ArrayList<Course> relatedCourses;
 
-  public Course(int idNumber, String courseName, String subject, String introductionText, String courseLevel) {
-    this.idNumber = idNumber;
+  public Course(String courseName, String subject, String introductionText, Level courseLevel) {
     this.courseName = courseName;
     this.subject = subject;
     this.introductionText = introductionText;
     this.courseLevel = courseLevel;
+    relatedCourses = new ArrayList<>();
   }
 
-  public int getIdNumber() {
-    return idNumber;
+  public ArrayList<Course> getRelatedCourses() {
+    return relatedCourses;
   }
 
-  public void setIdNumber(int idNumber) {
-    this.idNumber = idNumber;
+  public void addRelatedCourses(Course course) {
+    if (!relatedCourses.contains(course)) {
+      relatedCourses.add(course);
+    }
   }
 
   public String getCourseName() {
@@ -50,20 +51,12 @@ public class Course {
     this.introductionText = introductionText;
   }
 
-  public String getCourseLevel() {
+  public Level getCourseLevel() {
     return courseLevel;
   }
 
-  public void setCourseLevel(String courseLevel) {
+  public void setCourseLevel(Level courseLevel) {
     this.courseLevel = courseLevel;
-  }
-
-  public ArrayList<Course> getRelatedCourses() {
-    return relatedCourses;
-  }
-
-  public void setRelatedCourses(ArrayList<Course> relatedCourses) {
-    this.relatedCourses = relatedCourses;
   }
 
 }

@@ -31,10 +31,9 @@ public class StudentController {
     } else {
       // If email is found display student data
       message = new StringBuilder();
-      message.append("Email: " + rs.getString(1) + "\n");
-      message.append("Name: " + rs.getString(2) + " " + rs.getString(3) + "\n");
-      message.append("Date of birth: " + rs.getString(4) + "\n");
-      message.append("Gender : " + rs.getString(5) + "\n");
+      message.append("Email: " + rs.getString(1) + "\n")
+          .append("Name: " + rs.getString(2) + " " + rs.getString(3) + "\n")
+          .append("Date of birth: " + rs.getString(4) + "\n").append("Gender : " + rs.getString(5) + "\n");
       InfoBox.Display("Student was found", message.toString());
     }
   }

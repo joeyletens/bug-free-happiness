@@ -22,7 +22,7 @@ public class RegistrationPage {
     registrationScreen.setPadding(new Insets(20, 30, 20, 30));
 
     // Label for title
-    Label title = new Label("Student");
+    Label title = new Label("Registration");
     title.setStyle("-fx-font: 24 arial;");
     registrationScreen.add(title, 0, 0, 2, 1);
 

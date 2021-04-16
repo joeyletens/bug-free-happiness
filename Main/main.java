@@ -13,7 +13,6 @@ public class Main extends Application {
 
   @Override
   public void start(Stage arg0) throws Exception {
-    // TODO Auto-generated method stub
 
     CreateNewScene createNewScene = new CreateNewScene();
     createNewScene.createWindow();

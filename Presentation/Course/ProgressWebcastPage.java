@@ -21,7 +21,7 @@ public class ProgressWebcastPage {
     form.setPadding(new Insets(15, 25, 15, 25));
 
     // Title
-    form.add(new Label("MAKE PROGRESS: enter student and module details below"), 0, 0, 3, 1);
+    form.add(new Label("MAKE PROGRESS: enter student and webcast details below"), 0, 0, 3, 1);
 
     // Add student email box
     form.add(new Label("Email:"), 0, 1);
@@ -34,7 +34,7 @@ public class ProgressWebcastPage {
     form.add(contentId, 0, 4, 3, 1);
 
     // Add course progress box
-    form.add(new Label("Progress:"), 0, 5);
+    form.add(new Label("Progress made:"), 0, 5);
     progress = new TextField();
     form.add(progress, 0, 6, 3, 1);
 

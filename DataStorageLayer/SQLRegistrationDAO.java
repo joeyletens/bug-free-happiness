@@ -17,7 +17,7 @@ public class SQLRegistrationDAO {
   // Databse connection login and import
   private final String DB_USERNAME = "sa";
   private final String DB_PASSWORD = "QuattroIsLeuk";
-  private final String DB_URL = "jdbc:sqlserver://localhost\\MSSQLSERVER;databaseName=CodecademyStudent";
+  private final String DB_URL = "jdbc:sqlserver://localhost\\MSSQLSERVER;databaseName=QuatroCodecademy";
   private final String JDBC_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
   // The CRUD prepared statements
@@ -25,12 +25,13 @@ public class SQLRegistrationDAO {
   private final String SQL_SELECT = "SELECT * FROM Registration WHERE Email = ?;";
   private final String SQL_DELETE = "DELETE FROM Registration WHERE email = ? AND CourseName = ? AND RegistrationDate = ?;";
   private final String SQL_CHECK = "SELECT * FROM Registration WHERE email = ? AND CourseName = ? AND RegistrationDate = ?;";
-  private final String SQL_UPDATE = "UPDATE Registration SET date = ? WHERE email = ? AND CourseName = ? AND RegistrationDate = ?;";
+  private final String SQL_UPDATE = "UPDATE Registration SET RegistrationDate = ? WHERE email = ? AND CourseName = ? AND RegistrationDate = ?;";
 
   // Prepared statement and resultset pre defined
   private PreparedStatement ps;
   private ResultSet rs;
   RegistrationController registrationController;
+  Connection connSelect;
 
   // // Executes insert statement
   public boolean ExecuteInsertStatement(Registration registration) throws SQLException {
@@ -40,9 +41,9 @@ public class SQLRegistrationDAO {
       ps = conn.prepareStatement(SQL_INSERT);
 
       // Added paramter values to prepared statement
+      ps.setString(1, registration.getApplicationDate());
       ps.setString(2, registration.getEmail());
       ps.setString(3, registration.getCourseName());
-      ps.setString(1, registration.getApplicationDate());
 
       // Execute the prepared statement
       ps.executeUpdate();
@@ -56,12 +57,12 @@ public class SQLRegistrationDAO {
 
   // // excute the prepared statement
   public ResultSet ExecuteSelectStatement(String email) throws SQLException {
-    try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
+    try {
       // import and connect to database
       Class.forName(JDBC_DRIVER);
-
+      connSelect = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
       // Create prepatedStatement
-      ps = conn.prepareStatement(SQL_SELECT);
+      ps = connSelect.prepareStatement(SQL_SELECT);
       ps.setString(1, email);
 
       // execute select and put it in a resultset
@@ -85,15 +86,17 @@ public class SQLRegistrationDAO {
       Class.forName(JDBC_DRIVER);
 
       // Check if exists
-      if (!checkIfRegistrationExists(registration)) {
+      if (ExecuteSelectStatement(registration.getEmail()) == null) {
         return false;
       }
 
-      // Prepare statement
+      // prepare statement and insert query
       ps = conn.prepareStatement(SQL_DELETE);
-      ps.setString(2, registration.getEmail());
-      ps.setString(3, registration.getCourseName());
-      ps.setString(1, registration.getApplicationDate());
+
+      // Prepare statement
+      ps.setString(1, registration.getEmail());
+      ps.setString(2, registration.getCourseName());
+      ps.setString(3, registration.getApplicationDate());
 
       // Execute delete statement
       ps.executeUpdate();
@@ -108,31 +111,31 @@ public class SQLRegistrationDAO {
   public boolean ExecuteUpdateStatement(Registration registration) throws SQLException {
     try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
       // import and get connection
-      Class.forName(JDBC_DRIVER);
 
       // Check if exists
-      if (!checkIfRegistrationExists(registration)) {
+      if (ExecuteSelectStatement(registration.getEmail()) == null) {
         return false;
       }
 
       // Create registration controller to get current date
+      Class.forName(JDBC_DRIVER);
       registrationController = new RegistrationController();
 
       // Prepare statement
       ps = conn.prepareStatement(SQL_UPDATE);
-      ps.setString(3, registration.getEmail());
-      ps.setString(4, registration.getCourseName());
-      ps.setString(2, registration.getApplicationDate());
       ps.setString(1, registrationController.getDate());
+      ps.setString(2, registration.getEmail());
+      ps.setString(3, registration.getCourseName());
+      ps.setString(4, registration.getApplicationDate());
 
       // Execute the prepared statement
       ps.executeUpdate();
-      return true;
 
     } catch (Exception e) {
       e.printStackTrace();
       return false;
     }
+    return true;
   }
 
   public boolean checkIfRegistrationExists(Registration registration) throws SQLException {

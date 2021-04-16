@@ -29,8 +29,13 @@ public class MailTools {
    * @ensures \result = true; }
    * 
    */
-  public static String validateMailAddress(String mailAddress) {
+  public static boolean validateMailAddress(String email) {
+    String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?!-)(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
 
-    return null;
+    if (email.matches(regex)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
