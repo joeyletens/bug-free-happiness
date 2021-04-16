@@ -14,10 +14,10 @@ public class SQLStatisticsDAO {
   private final String JDBC_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
   // The CRUD prepared statements
-  private final String SQL_AVERAGEPROGRESS = "";
-  private final String SQL_STUDENTPROGRESS = "";
-  private final String SQL_TOPTHREE = "";
-  private final String SQL_PASSEDSTUDENT = "";
+  private final String SQL_AVERAGEPROGRESS = "SELECT * FROM Course WHERE Course = ?";
+  private final String SQL_STUDENTPROGRESS = "SELECT * FROM Course WHERE Course = ? AND Email = ?";
+  private final String SQL_TOPTHREE = "SELECT * FROM Course WHERE Course = ?";
+  private final String SQL_PASSEDSTUDENT = "SELECT * FROM Course WHERE Course = ?";
 
   // Prepared statement and resultset pre defined
   private PreparedStatement ps;
@@ -31,6 +31,7 @@ public class SQLStatisticsDAO {
 
       // Create prepatedStatement
       ps = conn.prepareStatement(SQL_AVERAGEPROGRESS);
+      ps.setString(1, courseName);
 
       // execute select and put it in a resultset
       rs = ps.executeQuery();
@@ -54,7 +55,8 @@ public class SQLStatisticsDAO {
 
       // Create prepatedStatement
       ps = conn.prepareStatement(SQL_STUDENTPROGRESS);
-
+      ps.setString(1, courseName);
+      ps.setString(2, email);
       // execute select and put it in a resultset
       rs = ps.executeQuery();
 
@@ -100,6 +102,7 @@ public class SQLStatisticsDAO {
 
       // Create prepatedStatement
       ps = conn.prepareStatement(SQL_PASSEDSTUDENT);
+      ps.setString(1, courseName);
 
       // execute select and put it in a resultset
       rs = ps.executeQuery();
