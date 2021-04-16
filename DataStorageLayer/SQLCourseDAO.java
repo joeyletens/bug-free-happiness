@@ -19,12 +19,15 @@ public class SQLCourseDAO {
   // The CRUD prepared statements
   private final String SQL_CHECKCOURSE = "SELECT * FROM Course WHERE coursename = ?;";
   private final String SQL_CHECKREGISTRATION = "SELECT * FROM Registration WHERE email = ? ;";
-  private final String SQL_CONTENTGETPROGRESS = "SELECT * FROM Viewed WHERE ContentId = ? AND Email = ? ORDER BY timestamp ASC;";
-  private final String SQL_CONTENTMAKEPROGRESS = "UPDATE Viewed SET Progress ? WHERE ContentId = ? AND Email = ? ORDER BY timestamp ASC;";
+  private final String SQL_CONTENTGETPROGRESS = "SELECT Progress FROM Viewed WHERE Email = ? AND ContentId = ?;";
+  private final String SQL_CONTENTMAKEPROGRESS = "UPDATE Viewed SET Progress = ? WHERE Email = ? AND ContentId = ?;";
 
   // Prepared statement and resultset pre defined
   private PreparedStatement ps;
   private ResultSet rs;
+
+  // DAO's
+  SQLStudentDAO studentDAO = new SQLStudentDAO();
 
   // This method checks if a course exists for the registration
   public boolean checkIfCourseExists(String courseName) throws SQLException {
@@ -77,7 +80,7 @@ public class SQLCourseDAO {
   }
 
   // This method return a student's progress in a specific module
-  public float returnModuleProgress(Viewed viewed) throws SQLException {
+  public int returnModuleProgress(Viewed viewed) throws SQLException {
     try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
       // import and connect to database
       Class.forName(JDBC_DRIVER);
@@ -92,7 +95,7 @@ public class SQLCourseDAO {
 
       // Check if result is not empty
       if (rs.next()) {
-        return ((Number) rs.getObject(3)).intValue();
+        return rs.getInt(1);
       } else {
         return -1;
       }
@@ -103,7 +106,7 @@ public class SQLCourseDAO {
   }
 
   // this method returns a student's progress in a specific webcast
-  public float returnWebcastProgress(Viewed viewed) throws SQLException {
+  public int returnWebcastProgress(Viewed viewed) throws SQLException {
     try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
       // import and connect to database
       Class.forName(JDBC_DRIVER);
@@ -118,7 +121,7 @@ public class SQLCourseDAO {
 
       // Check if result is not empty
       if (rs.next()) {
-        return ((Number) rs.getObject(3)).intValue();
+        return rs.getInt(1);
       } else {
         return -1;
       }
@@ -135,7 +138,15 @@ public class SQLCourseDAO {
       Class.forName(JDBC_DRIVER);
 
       // Get current progress
-      int currentProgress = (int) returnModuleProgress(viewed) + progress;
+      int currentProgress = 0;
+      // Check if module exists
+      if (returnWebcastProgress(viewed) < 0) {
+        return false;
+      } else if (returnWebcastProgress(viewed) + progress > 100) {
+        currentProgress = 100;
+      } else {
+        currentProgress = returnWebcastProgress(viewed) + progress;
+      }
 
       // Create prepatedStatement
       ps = conn.prepareStatement(SQL_CONTENTMAKEPROGRESS);
@@ -144,14 +155,10 @@ public class SQLCourseDAO {
       ps.setInt(3, viewed.getContentId());
 
       // execute select and put it in a resultset
-      rs = ps.executeQuery();
+      ps.executeUpdate();
 
       // Check if result is not empty
-      if (rs.next()) {
-        return true;
-      } else {
-        return false;
-      }
+      return true;
     } catch (Exception e) {
       e.printStackTrace();
       return false;
@@ -164,7 +171,17 @@ public class SQLCourseDAO {
       Class.forName(JDBC_DRIVER);
 
       // Get current progress
-      int currentProgress = (int) returnModuleProgress(viewed) + progress;
+      int currentProgress = 0;
+      // Check if module exists
+      if (returnModuleProgress(viewed) < 0) {
+        return false;
+      } else if (returnModuleProgress(viewed) + progress > 100) {
+        currentProgress = 100;
+      } else {
+        currentProgress = returnModuleProgress(viewed) + progress;
+      }
+      // Get current progress
+      currentProgress = returnWebcastProgress(viewed) + progress;
 
       // Create prepatedStatement
       ps = conn.prepareStatement(SQL_CONTENTMAKEPROGRESS);
@@ -178,9 +195,9 @@ public class SQLCourseDAO {
       // Check if result is not empty
       if (rs.next()) {
         return true;
-      } else {
-        return false;
       }
+      return false;
+
     } catch (Exception e) {
       e.printStackTrace();
       return false;

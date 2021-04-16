@@ -1,7 +1,6 @@
 package ApplicationLogic;
 
 import java.sql.SQLException;
-
 import DataStorageLayer.SQLCourseDAO;
 import DomainModel.Viewed;
 import Presentation.InfoBox;
@@ -13,12 +12,12 @@ public class CourseController {
     // This method return a students progress in a certain module and display it
     int result = -1;
     try {
-      result = (int) dao.returnModuleProgress(viewed);
+      result = dao.returnModuleProgress(viewed);
     } catch (SQLException e) {
       e.printStackTrace();
     }
     // Check if result is larger than -1 if true return result
-    if (result < 0) {
+    if (result == -1) {
       InfoBox.Display("No progress found", "Student is not enrolled to course\nor could not find module");
     } else {
       InfoBox.Display("Module progress", "Student made " + result + "% progress");
