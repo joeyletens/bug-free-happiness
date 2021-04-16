@@ -1,7 +1,5 @@
 package DomainModel;
 
-import java.sql.Date;
-
 public class Modules extends ContentItem {
   private String title;
   private String version;
@@ -9,13 +7,14 @@ public class Modules extends ContentItem {
   private int followNumber;
   private Course course;
 
-  public Modules(int contentId, Date publicationDate, Status status, String description, String title, String version,
-      String contactPersonEmail, int followNumber, int progress) {
-    super(contentId, publicationDate, status, description, progress);
+  public Modules(int contentId, String publicationDate, Status status, String description, int duration, String title,
+      String version, String contactPersonEmail, int followNumber, Course course) {
+    super(contentId, publicationDate, status, description, duration);
     this.title = title;
     this.version = version;
     this.contactPersonEmail = contactPersonEmail;
     this.followNumber = followNumber;
+    this.course = course;
   }
 
   public String getTitle() {

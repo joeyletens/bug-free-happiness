@@ -1,16 +1,14 @@
 package DomainModel;
 
-import java.sql.Date;
-
 public class ContentItem {
   private int contentId;
-  private Date publicationDate;
+  private String publicationDate;
   private Status status;
   private String description;
-  private int duration;
+  protected int duration;
   protected int progress;
 
-  public ContentItem(int contentId, Date publicationDate, Status status, String description, int duration) {
+  public ContentItem(int contentId, String publicationDate, Status status, String description, int duration) {
     this.contentId = contentId;
     this.publicationDate = publicationDate;
     this.status = status;
@@ -35,11 +33,11 @@ public class ContentItem {
     this.contentId = contentId;
   }
 
-  public Date getPublicationDate() {
+  public String getPublicationDate() {
     return publicationDate;
   }
 
-  public void setPublicationDate(Date publicationDate) {
+  public void setPublicationDate(String publicationDate) {
     this.publicationDate = publicationDate;
   }
 
