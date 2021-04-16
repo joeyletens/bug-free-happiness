@@ -9,7 +9,7 @@ public class Modules extends ContentItem {
   private int followNumber;
   private Course course;
 
-  public Modules(int contentId, Date publicationDate, String status, String description, String title, String version,
+  public Modules(int contentId, Date publicationDate, Status status, String description, String title, String version,
       String contactPersonEmail, int followNumber, int progress) {
     super(contentId, publicationDate, status, description, progress);
     this.title = title;
