@@ -59,7 +59,7 @@ public class StatisticsController {
             .append("Average: " + rs.getString(2) + "\n").append("===============================\n");
         while (rs.next()) {
           selectList.append("===============================\n").append("Title: " + rs.getString(1) + "\n")
-              .append("Average: " + rs.getString(2) + "\n").append("===============================");
+              .append("Average: " + rs.getString(2) + "\n").append("===============================\n");
         }
       } catch (SQLException e) {
         e.printStackTrace();

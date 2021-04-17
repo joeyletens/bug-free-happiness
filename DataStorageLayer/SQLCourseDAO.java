@@ -173,12 +173,12 @@ public class SQLCourseDAO {
       // Get current progress
       int currentProgress = 0;
       // Check if module exists
-      if (returnModuleProgress(viewed) < 0) {
+      if (returnWebcastProgress(viewed) < 0) {
         return false;
-      } else if (returnModuleProgress(viewed) + progress > 100) {
+      } else if (returnWebcastProgress(viewed) + progress > 100) {
         currentProgress = 100;
       } else {
-        currentProgress = returnModuleProgress(viewed) + progress;
+        currentProgress = returnWebcastProgress(viewed) + progress;
       }
       // Get current progress
       currentProgress = returnWebcastProgress(viewed) + progress;
@@ -190,18 +190,15 @@ public class SQLCourseDAO {
       ps.setInt(3, viewed.getContentId());
 
       // execute select and put it in a resultset
-      rs = ps.executeQuery();
+      ps.executeUpdate();
 
       // Check if result is not empty
-      if (rs.next()) {
-        return true;
-      }
-      return false;
 
     } catch (Exception e) {
       e.printStackTrace();
       return false;
     }
+    return true;
   }
 
 }
