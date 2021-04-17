@@ -56,7 +56,7 @@ public class StatisticsController {
       try {
         selectList.append("Average student progess results for ").append(courseName)
             .append("\n===============================\n").append("Title: " + rs.getString(1) + "\n")
-            .append("Average: " + rs.getString(2) + "\n").append("===============================");
+            .append("Average: " + rs.getString(2) + "\n").append("===============================\n");
         while (rs.next()) {
           selectList.append("===============================\n").append("Title: " + rs.getString(1) + "\n")
               .append("Average: " + rs.getString(2) + "\n").append("===============================");

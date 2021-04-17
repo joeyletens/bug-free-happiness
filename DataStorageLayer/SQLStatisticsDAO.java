@@ -14,20 +14,22 @@ public class SQLStatisticsDAO {
   private final String JDBC_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
   // The CRUD prepared statements
-  private final String SQL_AVERAGEPROGRESS = "SELECT * FROM Course WHERE Course = ?";
-  private final String SQL_STUDENTPROGRESS = "SELECT * FROM Course WHERE Course = ? AND Email = ?";
+  private final String SQL_AVERAGEPROGRESS = "SELECT Module.Title, AVG((Viewed.Progress * 100)/Content.duration) AS AVG_Progress FROM Viewed RIGHT JOIN ContentItem AS Content ON Viewed.ContentId = Content.ContentId RIGHT JOIN Module AS Module ON Content.ContentId = Module.ContentId RIGHT JOIN Student ON Student.Email = Viewed.Email WHERE CourseName = ? GROUP BY Module.Title";
+  private final String SQL_STUDENTPROGRESS = "SELECT Module.title, AVG((Viewed.Progress * 100)/Content.duration) AS AVG_Progress FROM Viewed RIGHT JOIN ContentItem AS Content ON Viewed.ContentId = Content.ContentId RIGHT JOIN Module AS Module ON Content.ContentId = Module.ContentId RIGHT JOIN Student ON Student.Email = Viewed.Email WHERE student.Email = ? AND Module.CourseName = ? GROUP BY Module.Title;";
   private final String SQL_TOPTHREE = "SELECT * FROM Course WHERE Course = ?";
   private final String SQL_PASSEDSTUDENT = "SELECT * FROM Course WHERE Course = ?";
 
   // Prepared statement and resultset pre defined
   private PreparedStatement ps;
   private ResultSet rs;
+  Connection conn;
 
   // // excute the prepared statement
   public ResultSet ExecuteAverageProgress(String courseName) throws SQLException {
-    try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
+    try {
       // import and connect to database
       Class.forName(JDBC_DRIVER);
+      conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
 
       // Create prepatedStatement
       ps = conn.prepareStatement(SQL_AVERAGEPROGRESS);
@@ -49,14 +51,16 @@ public class SQLStatisticsDAO {
   }
 
   public ResultSet ExecuteStudentProgress(String courseName, String email) throws SQLException {
-    try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
+    try {
       // import and connect to database
       Class.forName(JDBC_DRIVER);
+      conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
 
       // Create prepatedStatement
       ps = conn.prepareStatement(SQL_STUDENTPROGRESS);
-      ps.setString(1, courseName);
-      ps.setString(2, email);
+      ps.setString(1, email);
+      ps.setString(2, courseName);
+
       // execute select and put it in a resultset
       rs = ps.executeQuery();
 
@@ -73,9 +77,10 @@ public class SQLStatisticsDAO {
   }
 
   public ResultSet ExecuteTopThree() throws SQLException {
-    try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
+    try {
       // import and connect to database
       Class.forName(JDBC_DRIVER);
+      conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
 
       // Create prepatedStatement
       ps = conn.prepareStatement(SQL_TOPTHREE);
@@ -96,9 +101,10 @@ public class SQLStatisticsDAO {
   }
 
   public ResultSet ExecutePassedStudent(String courseName) throws SQLException {
-    try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
+    try {
       // import and connect to database
       Class.forName(JDBC_DRIVER);
+      conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
 
       // Create prepatedStatement
       ps = conn.prepareStatement(SQL_PASSEDSTUDENT);
