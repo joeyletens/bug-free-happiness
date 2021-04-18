@@ -59,7 +59,7 @@ public class StatisticsController {
             .append("Average: " + rs.getString(2) + "\n").append("===============================\n");
         while (rs.next()) {
           selectList.append("===============================\n").append("Title: " + rs.getString(1) + "\n")
-              .append("Average: " + rs.getString(2) + "\n").append("===============================");
+              .append("Average: " + rs.getString(2) + "\n").append("===============================\n");
         }
       } catch (SQLException e) {
         e.printStackTrace();
@@ -82,10 +82,13 @@ public class StatisticsController {
       // else read through the whole list GET TITLE
       selectList = new StringBuilder();
       try {
-        selectList.append("\n===============================\n").append("Title: " + rs.getString(1) + "\n");
+
+        selectList.append("Top three most viewed courses").append("\n===============================\n")
+            .append("Title: " + rs.getString(1) + "\n").append("Views: " + rs.getString(2) + "\n");
 
         while (rs.next()) {
-          selectList.append("Title: " + rs.getString(1) + "\n");
+          selectList.append("\n===============================\n").append("Title: " + rs.getString(1) + "\n")
+              .append("Views: " + rs.getString(2) + "\n");
 
         }
       } catch (SQLException e) {
@@ -108,7 +111,8 @@ public class StatisticsController {
     } else {
       // else read through the whole list GET AMOUNT
       try {
-        InfoBox.Display("Top 3 webcasts", "Amount of students who passed: \n" + courseName + " are " + rs.getString(1));
+        InfoBox.Display("Students who passed",
+            "Amount of students who passed: \n" + courseName + " are " + rs.getString(2));
       } catch (SQLException e) {
         InfoBox.Display("No result", "Could not find any modules");
         e.printStackTrace();

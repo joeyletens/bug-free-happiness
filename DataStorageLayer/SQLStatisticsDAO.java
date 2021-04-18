@@ -16,8 +16,8 @@ public class SQLStatisticsDAO {
   // The CRUD prepared statements
   private final String SQL_AVERAGEPROGRESS = "SELECT Module.Title, AVG((Viewed.Progress * 100)/Content.duration) AS AVG_Progress FROM Viewed RIGHT JOIN ContentItem AS Content ON Viewed.ContentId = Content.ContentId RIGHT JOIN Module AS Module ON Content.ContentId = Module.ContentId RIGHT JOIN Student ON Student.Email = Viewed.Email WHERE CourseName = ? GROUP BY Module.Title";
   private final String SQL_STUDENTPROGRESS = "SELECT Module.title, AVG((Viewed.Progress * 100)/Content.duration) AS AVG_Progress FROM Viewed RIGHT JOIN ContentItem AS Content ON Viewed.ContentId = Content.ContentId RIGHT JOIN Module AS Module ON Content.ContentId = Module.ContentId RIGHT JOIN Student ON Student.Email = Viewed.Email WHERE student.Email = ? AND Module.CourseName = ? GROUP BY Module.Title;";
-  private final String SQL_TOPTHREE = "SELECT * FROM Course WHERE Course = ?";
-  private final String SQL_PASSEDSTUDENT = "SELECT * FROM Course WHERE Course = ?";
+  private final String SQL_TOPTHREE = "SELECT TOP 3 Webcast.Title, COUNT(Email) AS Views FROM Webcast LEFT JOIN Viewed ON Webcast.ContentId = Viewed.ContentId GROUP BY Webcast.Title ORDER BY COUNT(Email) DESC;";
+  private final String SQL_PASSEDSTUDENT = "SELECT CourseName, COUNT(*) as passed_students FROM Viewed RIGHT JOIN ContentItem ON Viewed.ContentId = ContentItem.ContentId RIGHT JOIN Module ON Viewed.ContentId = Module.ContentId WHERE duration = Progress GROUP BY CourseName HAVING CourseName = ?;";
 
   // Prepared statement and resultset pre defined
   private PreparedStatement ps;

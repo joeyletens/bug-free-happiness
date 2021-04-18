@@ -12,7 +12,7 @@ public class CreateNewScene {
   public void createWindow() {
     // Create window layout
     window.initModality(Modality.APPLICATION_MODAL);
-    window.setTitle("Jo jo Joey");
+    window.setTitle("Jelmer Verhoeven 2154728 - Joey Letens 2159107");
     window.setMinWidth(250);
     window.setScene(new Scene(HomePage.getHomePage()));
     window.show();

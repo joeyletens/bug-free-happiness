@@ -1,5 +1,6 @@
 package Presentation.Statistics;
 
+import ApplicationLogic.StatisticsController;
 import Presentation.CreateNewScene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -12,6 +13,7 @@ public class StatisticsPage {
 
   // Class to return a borderpane of the HomePage, return a layout
   public GridPane GUI() {
+    StatisticsController controller = new StatisticsController();
     // Create button list
     GridPane buttonList = new GridPane();
     buttonList.setHgap(20);
@@ -45,8 +47,7 @@ public class StatisticsPage {
     // Button to go to top 3 most viewed page
     Button topThreeBtn = new Button("Top 3 most viewed\nwebcast");
     buttonList.add(topThreeBtn, 0, 3);
-    TopThree topThree = new TopThree();
-    topThreeBtn.setOnAction(e -> CreateNewScene.changeScene(topThree.GUI()));
+    topThreeBtn.setOnAction(e -> controller.topThreeMostViewedWebcasts());
     topThreeBtn.setMinSize(buttonWidth, buttonHeight);
 
     // Button to go to amount of student swho passed a course page
