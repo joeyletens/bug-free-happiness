@@ -82,10 +82,13 @@ public class StatisticsController {
       // else read through the whole list GET TITLE
       selectList = new StringBuilder();
       try {
-        selectList.append("\n===============================\n").append("Title: " + rs.getString(1) + "\n");
+
+        selectList.append("Top three most viewed courses").append("\n===============================\n")
+            .append("Title: " + rs.getString(1) + "\n").append("Views: " + rs.getString(2) + "\n");
 
         while (rs.next()) {
-          selectList.append("Title: " + rs.getString(1) + "\n");
+          selectList.append("\n===============================\n").append("Title: " + rs.getString(1) + "\n")
+              .append("Views: " + rs.getString(2) + "\n");
 
         }
       } catch (SQLException e) {
